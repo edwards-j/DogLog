@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "doglog-2bd82": {
+      "hosting": {
+        "DogLog": [
+          "doglog-2bd82"
+        ]
+      }
+    }
+  }
+}
