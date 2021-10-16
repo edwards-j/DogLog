@@ -49,6 +49,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
+import { PetCardComponent } from './pet/pet-card/pet-card.component';
+import { PetDetailsComponent } from './pet/pet-details/pet-details.component';
 
 
 @NgModule({
@@ -56,7 +58,9 @@ import { MatTreeModule } from '@angular/material/tree';
     AppComponent,
     HomeComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    PetCardComponent,
+    PetDetailsComponent
   ],
   imports: [
     BrowserModule,

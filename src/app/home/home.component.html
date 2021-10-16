@@ -1,2 +1,39 @@
 <p>home works!</p>
+
 <button (click)="logOut()">Log Out</button>
+
+<mat-card class="form-card">
+    <form [formGroup]="addPetForm" (ngSubmit)="addPet()">
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Pet's Name</mat-label>
+                <input formControlName="petName" type="text" matInput placeholder="Pet's Name">
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Breed</mat-label>
+                <input formControlName="breed" matInput placeholder="Breed">
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Gender</mat-label>
+                <input formControlName="gender" matInput placeholder="Gender">
+            </mat-form-field>
+        </p>
+        <!-- <p>
+            <mat-form-field appearance="outline">
+                <mat-label>Birthday</mat-label>
+                <input formControlName="birthday" [matDatepicker]="birthdayDatepicker">
+                <mat-datepicker #birthdayDatepicker></mat-datepicker>
+            </mat-form-field>
+        </p> -->
+        
+
+        <button mat-raised-button color="primary">Add Pet</button>
+    </form>
+</mat-card>
+
+<h2>Your Pets</h2>
+<p *ngFor="let pet of pets" (click)="navigateToPetDeail(pet)">{{pet?.petName}}</p>

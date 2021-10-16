@@ -8,7 +8,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 export class AuthService {
 
-  constructor(private router: Router, private afAuth: AngularFireAuth, private afs: AngularFirestore) {
+  constructor(private router: Router, private afAuth: AngularFireAuth, private db: AngularFirestore) {
 
     // Set up the observable to track auth state changes
     // If a user logs in, set their info in session
@@ -46,7 +46,7 @@ export class AuthService {
       .then((result) => {
         let emailLower = user.email.toLowerCase();
 
-        this.afs.doc('/users/' + emailLower)    // on a successful signup, create a document in 'users' collection with the new user's info
+        this.db.doc('/users/' + emailLower)    // on a successful signup, create a document in 'users' collection with the new user's info
           .set({
             accountType: 'endUser',
             displayName: user.displayName,
@@ -112,15 +112,15 @@ export class AuthService {
 
   setUserInfo(payload: object) {
     console.log('Auth Service: saving user info...');
-    this.afs.collection('users')
+    this.db.collection('users')
       .add(payload).then((res: any) => {
         console.log("Auth Service: setUserInfo response...")
         console.log(res);
       })
   }
 
-  getCurrentUser() {
-    return this.afAuth.currentUser;                                 // returns user object for logged-in users, otherwise returns null 
+  getUserDataFromSession() {
+    let userString = sessionStorage.getItem('user')
+    return JSON.parse(userString || '{}')
   }
-
 }
