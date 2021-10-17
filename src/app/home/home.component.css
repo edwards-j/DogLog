@@ -1,0 +1,6 @@
+.home-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 1em;
+}

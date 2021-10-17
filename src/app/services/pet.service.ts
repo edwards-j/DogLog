@@ -12,16 +12,10 @@ export class PetService {
   }
 
 
-  addPet(newPet: any) {
+  addPet(newPet: any): Promise<any> {
     console.log('Pet Service: saving new pet...');
 
-    this.db.collection('pets')
-      .add(newPet).then((res: any) => {
-        console.log('in service', res)
-        console.log("Pet Service: addPet response...")
-
-        alert(`${newPet.petName} was successfully created!`)
-      })
+    return this.db.collection('pets').add(newPet)
   }
 
   // Gets the pets for a user one time
