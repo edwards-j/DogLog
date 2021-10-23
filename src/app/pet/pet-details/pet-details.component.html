@@ -1,1 +1,14 @@
 <p>{{currentPet.petName}} Information</p>
+<button mat-button (click)="deletePet()">
+    <mat-icon>delete</mat-icon>
+    <span>Delete Pet</span>
+</button>
+<button (click)="addDailyLog()">Add Daily Log</button>
+
+<mat-card *ngFor="let log of dailyLogs" (click)="navigateToDailyLog(log)">
+    <mat-card-header>
+            <!-- <img mat-card-avatar> -->
+        <mat-card-title>{{log.date | date:'shortDate'}}</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+</mat-card>

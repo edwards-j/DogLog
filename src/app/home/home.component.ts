@@ -29,10 +29,11 @@ export class HomeComponent implements OnInit {
 
   getPets() {
     this.petService.getUsersPets(this.user.uid).subscribe(res => {
-      this.pets = res.docs.map((d: any) => {
+
+      this.pets = res.map((d: any) => {
         return {
-          "id": d.id,
-          "petName": d.data().petName
+          "id": d.payload.doc.id,
+          "petName": d.payload.doc.data().petName
         }
       })
     })

@@ -1,0 +1,7 @@
+<button mat-button (click)="deleteDailyLog()">
+    <mat-icon>delete</mat-icon>
+    <span>Delete Daily Log</span>
+</button>
+
+<p>Date: {{dailyLog.date | date: 'shortDate'}}</p>
+<p>Breakfast? {{dailyLog.breakfast}}</p>

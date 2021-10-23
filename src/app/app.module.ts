@@ -53,6 +53,7 @@ import { PetCardComponent } from './pet/pet-card/pet-card.component';
 import { PetDetailsComponent } from './pet/pet-details/pet-details.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AddPetFormComponent } from './add-pet-form/add-pet-form.component';
+import { DailyLogComponent } from './daily-log/daily-log.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { AddPetFormComponent } from './add-pet-form/add-pet-form.component';
     PetCardComponent,
     PetDetailsComponent,
     NavbarComponent,
-    AddPetFormComponent
+    AddPetFormComponent,
+    DailyLogComponent
   ],
   imports: [
     BrowserModule,

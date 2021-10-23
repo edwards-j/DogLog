@@ -13,15 +13,31 @@ export class PetService {
 
 
   addPet(newPet: any): Promise<any> {
-    console.log('Pet Service: saving new pet...');
-
     return this.db.collection('pets').add(newPet)
+  }
+
+  deletePet(petId: any): Promise<any> {
+    return this.db.collection('pets').doc(petId).delete()
   }
 
   // Gets the pets for a user one time
   getUsersPets(userId: string): Observable<any> {
-    return this.db.collection('pets', pet => pet.where('userId', '==', userId)).get()
-
-    // Change the .get() to .valueChanges() to subscribe to any value change events to automatically update the data 
+    return this.db.collection('pets', pet => pet.where('userId', '==', userId)).snapshotChanges()
   }
+
+  getDailyLogs(petId: string): Observable<any> {
+    return this.db.collection('pets').doc(petId).collection('dailyLogs').snapshotChanges()
+  }
+
+  addDailyLog(petId: string , dailyLog: any) {
+    return this.db.collection('pets').doc(petId).collection('dailyLogs').add(dailyLog)
+  }
+
+  deleteDailyLog(petId: string , dailyLogId: any) {
+    return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).delete()
+  }
+
+  // addWalk(petId: string , dailyLogId: any, walk: any) {
+  //   return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('walks').add(walk)
+  // }
 }
