@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
   }
 
   navigateToPetDeail(pet: any) {
-    this.router.navigate(['/pet/' + pet.id], { state: { petData: pet } })
+    this.router.navigate(['/pet/'], { state: { petData: pet } })
   }
 
   openAddPetDialog() {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { config } from 'rxjs';
 import { PetService } from 'src/app/services/pet.service';
@@ -14,7 +14,7 @@ export class PetDetailsComponent implements OnInit {
   dailyLogs: any
 
 
-  constructor(private router: Router, private snackBar: MatSnackBar, private petService: PetService) {
+  constructor(private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar, private petService: PetService) {
 
     let state = this.router.getCurrentNavigation()!.extras.state
 
@@ -48,7 +48,7 @@ export class PetDetailsComponent implements OnInit {
 
         // Sort the logs in desc order, so newest is at the top
         this.dailyLogs.sort((a: any, b: any) => {
-         return b.date - a.date
+          return b.date - a.date
         })
       }
     })
@@ -58,7 +58,7 @@ export class PetDetailsComponent implements OnInit {
     // Check if there is already a log for today. If so, just return
     if (this.dailyLogs.length > 0) {
       if (this.dailyLogs[0].date === this.getCurrentDate()) {
-        this.snackBar.open('A log has already been created for today', 'Close', {duration: 2000})
+        this.snackBar.open('A log has already been created for today', 'Close', { duration: 2500 })
         return
       }
     }
@@ -78,7 +78,7 @@ export class PetDetailsComponent implements OnInit {
       ...log
     }
 
-    this.router.navigate(['/dailyLog/' + log.id], { state: { logData: dailyLogComponentState }})
+    this.router.navigate(['pet/dailyLog'], { state: { logData: dailyLogComponentState } })
   }
 
   deletePet() {
@@ -95,7 +95,7 @@ export class PetDetailsComponent implements OnInit {
       this.snackBar.open('Pet sucessfully deleted', 'Close', { verticalPosition: 'top' });
     }).catch((error) => {
       console.error("Error deleting pet: ", error);
-  });
+    });
   }
 
   getCurrentDate() {

@@ -29,7 +29,7 @@ export class PetService {
     return this.db.collection('pets').doc(petId).collection('dailyLogs').snapshotChanges()
   }
 
-  addDailyLog(petId: string , dailyLog: any) {
+  addDailyLog(petId: string , dailyLog: any): Promise<any> {
     return this.db.collection('pets').doc(petId).collection('dailyLogs').add(dailyLog)
   }
 
@@ -37,7 +37,15 @@ export class PetService {
     return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).delete()
   }
 
-  // addWalk(petId: string , dailyLogId: any, walk: any) {
-  //   return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('walks').add(walk)
-  // }
+  getWalks(petId: string , dailyLogId: any): Observable<any> {
+    return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('walks').snapshotChanges()
+  }
+
+  addWalk(petId: string , dailyLogId: any, walk: any): Promise<any> {
+    return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('walks').add(walk)
+  }
+
+  deleteWalk(petId: string , dailyLogId: any, walkId: any) {
+    return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('walks').doc(walkId).delete()
+  }
 }

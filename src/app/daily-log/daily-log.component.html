@@ -5,3 +5,20 @@
 
 <p>Date: {{dailyLog.date | date: 'shortDate'}}</p>
 <p>Breakfast? {{dailyLog.breakfast}}</p>
+
+<div>
+    <button mat-button (click)="addWalk()">
+        <mat-icon>add_circle</mat-icon>
+        <span>Add Walk</span>
+    </button>
+    <h3>Walks</h3>
+    <mat-card *ngFor="let walk of walks">
+        <mat-card-header>
+            <mat-card-title>{{walk.time | date:'shortDate'}}</mat-card-title>
+            <mat-card-subtitle>Distance: {{walk.distanceMiles}} miles</mat-card-subtitle>
+            <button mat-button (click)="deleteWalk(walk.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+        </mat-card-header>
+    </mat-card>
+</div>
