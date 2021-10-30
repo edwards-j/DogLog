@@ -1,4 +1,20 @@
 .pet-card {
     max-width: 80%;
-    margin: 0 auto 2em auto
+    margin: 0 auto 2em auto;
+    padding: 0;
+    border: 3px solid #7B8EFF;
+    color: white;
+    background-color: #17164E;
+    display: flex;
+}
+
+.pet-card-icon-section {
+    padding: 1em;
+    background-color: #7B8EFF;
+}
+
+.pet-card-title {
+    display: flex;
+    align-items: center;
+    padding: .5em;
 }

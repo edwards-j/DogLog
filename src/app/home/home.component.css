@@ -1,6 +1,29 @@
+.home-wrapper {
+    height: 100vh;
+}
+
 .home-header {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     margin: 1em;
+}
+
+.daily-logs-header {
+    text-align: center;
+    margin: 1.5em 0;
+}
+
+.add-button {
+    background-color: #72C7A9;
+    bottom: 80px;
+    right: 25px;
+    position: fixed
+}
+
+.add-icon {
+    color: #050535;
+    font-size: 50px;
+    line-height: inherit;
+    width: inherit
 }

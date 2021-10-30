@@ -1,16 +1,35 @@
-<p>{{currentPet.petName}} Information</p>
-<button mat-button (click)="deletePet()">
-    <mat-icon>delete</mat-icon>
-    <span>Delete Pet</span>
+<div class="pet-action-buttons">
+    <button mat-button class="edit-button">
+        <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-button class="delete-button" (click)="deletePet()">
+        <mat-icon>delete_outline</mat-icon>
+    </button>
+</div>
+<div class="pet-details-header">
+    <img class="pet-details-icon" src="../../../assets/dog.png">
+    <h1>{{currentPet.petName}}</h1>
+</div>
+
+<div class="pet-detail-info">
+    <div>
+        <p>Age: 6 years</p>
+        <p>Breed: Yellow Lab</p>
+    </div>
+    <div>
+        <p>Weight: 50lbs</p>
+        <p>Miles Walked: 100</p>
+    </div>
+</div>
+
+
+<!-- <button (click)="addDailyLog()">Add Daily Log</button> -->
+
+<h2 class="daily-logs-header">Daily Logs</h2>
+<div class="daily-log-card" *ngFor="let log of dailyLogs" (click)="navigateToDailyLog(log)">
+    <div>{{log.date | date:'shortDate'}}</div>
+</div>
+
+<button mat-fab class="add-button" (click)="addDailyLog()">
+    <mat-icon class="add-icon">add</mat-icon>
 </button>
-<button (click)="addDailyLog()">Add Daily Log</button>
-
-<mat-card *ngFor="let log of dailyLogs" (click)="navigateToDailyLog(log)">
-    <mat-card-header>
-            <!-- <img mat-card-avatar> -->
-        <mat-card-title>{{log.date | date:'shortDate'}}</mat-card-title>
-        <mat-card-subtitle></mat-card-subtitle>
-    </mat-card-header>
-</mat-card>
-
-<router-outlet></router-outlet>

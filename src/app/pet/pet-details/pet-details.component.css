@@ -1,0 +1,62 @@
+.pet-action-buttons {
+    display: flex;
+    justify-content: flex-end
+}
+
+.pet-details-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
+}
+
+.edit-button {
+    color: #EC8ECE;
+}
+
+.pet-details-icon {
+    height: 100px;
+    width: 100px;
+}
+
+.delete-button{
+    color: #F2557A
+}
+
+.pet-detail-info {
+    border: 2px solid #7B8EFF;
+    margin: 0 auto;
+    padding: 1em;
+    border-radius: 4px;
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.daily-logs-header {
+    text-align: center;
+    margin: 1.5em 0;
+}
+
+.daily-log-card {
+    margin: 1em;
+    padding: 1em;
+    border: 1px solid #66C4FA;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 2em;
+}
+
+.add-button {
+    background-color: #72C7A9;
+    bottom: 80px;
+    right: 25px;
+    position: fixed
+}
+
+.add-icon {
+    color: #050535;
+    font-size: 50px;
+    line-height: inherit;
+    width: inherit
+}

@@ -1,9 +1,12 @@
-<div class="home-header">
-    <h2>Your Pets</h2>
-    <button mat-raised-button color="primary" (click)="openAddPetDialog()">
-        <mat-icon>add_circle</mat-icon>
+<div class="home-wrapper">
+    <div class="home-header">
+        <h1>Your Pets</h1>
+    </div>
+
+
+    <pet-card *ngFor="let pet of pets" [petInfo]="pet" (click)="navigateToPetDeail(pet)"></pet-card>
+
+    <button mat-fab class="add-button" (click)="openAddPetDialog()">
+        <mat-icon class="add-icon">add</mat-icon>
     </button>
 </div>
-
-
-<pet-card *ngFor="let pet of pets" [petInfo]="pet" (click)="navigateToPetDeail(pet)"></pet-card>
