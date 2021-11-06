@@ -1,0 +1,11 @@
+<form [formGroup]="sharePetForm" (ngSubmit)="sharePet()">
+    <p>This user will be able to add daily logs, outs, and walks</p>
+    <p>They won't be able to edit or delete any pet info</p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Share with</mat-label>
+            <input formControlName="shareWith" type="email" matInput placeholder="user@email.com">
+        </mat-form-field>
+    </p>
+    <button mat-raised-button color="primary" [disabled]="!this.sharePetForm.valid">Share Pet</button>
+</form>

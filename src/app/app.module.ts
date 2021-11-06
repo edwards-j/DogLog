@@ -55,6 +55,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AddPetFormComponent } from './dialogs/add-pet-form/add-pet-form.component'
 import { DailyLogComponent } from './daily-log/daily-log.component';
 import { AddOutFormComponent } from './dialogs/add-out-form/add-out-form.component';
+import { NotesComponent } from './notes/notes.component';
+import { SharePetFormComponent } from './dialogs/share-pet-form/share-pet-form.component';
 
 
 @NgModule({
@@ -68,7 +70,9 @@ import { AddOutFormComponent } from './dialogs/add-out-form/add-out-form.compone
     NavbarComponent,
     AddPetFormComponent,
     DailyLogComponent,
-    AddOutFormComponent
+    AddOutFormComponent,
+    NotesComponent,
+    SharePetFormComponent
   ],
   imports: [
     BrowserModule,

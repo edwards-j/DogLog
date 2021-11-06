@@ -10,14 +10,19 @@
     align-items: center
 }
 
-.edit-button {
-    color: #EC8ECE;
-}
-
 .pet-details-icon {
     height: 100px;
     width: 100px;
 }
+
+.edit-button {
+    color: #EC8ECE;
+}
+
+.share-pet-button {
+    color: #72C7A9
+}
+
 
 .delete-button{
     color: #F2557A

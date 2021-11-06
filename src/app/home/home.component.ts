@@ -24,16 +24,18 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getPets()
+    this.getPets();
+    this.checkForShareInvite();
   }
 
   getPets() {
-    this.petService.getUsersPets(this.user.uid).subscribe(res => {
+    this.petService.getUsersPets(this.user.email).subscribe(res => {
 
       this.pets = res.map((d: any) => {
         return {
           "id": d.payload.doc.id,
-          "petName": d.payload.doc.data().petName
+          "petName": d.payload.doc.data().petName,
+          "ownerEmail": d.payload.doc.data().ownerEmail
         }
       })
     })
@@ -44,6 +46,21 @@ export class HomeComponent implements OnInit {
   }
 
   openAddPetDialog() {
-    this.dialog.open(AddPetFormComponent, { data: { userId: this.user.uid } })
+    this.dialog.open(AddPetFormComponent, { data: { userEmail: this.user.email } })
+  }
+
+  checkForShareInvite() {
+    this.petService.getShareInvites(this.user.email).subscribe(res => {
+      if (res) {
+        res.map((d: any) => {
+          console.log(d.payload.doc.data())
+          // return {
+          //   "time": d.payload.doc.data().time,
+          //   "petName": d.payload.doc.data().shareWith,
+          //   "ownerEmail": d.payload.doc.data().ownerEmail
+          // }
+        })
+      }
+    })
   }
 }

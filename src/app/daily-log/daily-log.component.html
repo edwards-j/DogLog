@@ -10,7 +10,7 @@
 
     <!-- Times Out Panel -->
     <mat-expansion-panel>
-        <mat-expansion-panel-header>
+        <mat-expansion-panel-header (click)='outsHeaderClicked()'>
             <mat-panel-title>
                 Times Let Out
             </mat-panel-title>
@@ -43,13 +43,13 @@
             </ng-container>
 
             <ng-container matColumnDef="actions">
-                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                    <mat-cell *matCellDef="let row">
-                            <button mat-button class="delete-button" (click)="deleteOut(row.id)">
-                                    <mat-icon>delete</mat-icon>
-                                </button>
-                    </mat-cell>
-                </ng-container>
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <button mat-button class="delete-button" (click)="deleteOut(row.id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
 
             <!-- Header and Row Declarations -->
             <mat-header-row *matHeaderRowDef="['time', 'pee', 'poo', 'actions']"></mat-header-row>
@@ -59,7 +59,7 @@
 
     <!-- Walks Panel -->
     <mat-expansion-panel>
-        <mat-expansion-panel-header>
+        <mat-expansion-panel-header (click)='walksHeaderClicked()'>
             <mat-panel-title>
                 Walks
             </mat-panel-title>
@@ -84,9 +84,29 @@
                 <mat-cell *matCellDef="let row"> {{row.distanceMiles}} </mat-cell>
             </ng-container>
 
+            <!-- Actions Definition -->
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <button mat-button class="delete-button" (click)="deleteWalk(row.id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
             <!-- Header and Row Declarations -->
-            <mat-header-row *matHeaderRowDef="['time', 'distance']"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: ['time', 'distance']"></mat-row>
+            <mat-header-row *matHeaderRowDef="['time', 'distance', 'actions']"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: ['time', 'distance', 'actions']"></mat-row>
         </mat-table>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header (click)='notesHeaderClicked()'>
+            <mat-panel-title>
+                Notes
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-notes [petId]='this.dailyLog.petId' [dailyLogId]='this.dailyLog.id' [notes]='this.notes'>
+        </app-notes>
     </mat-expansion-panel>
 </mat-accordion>

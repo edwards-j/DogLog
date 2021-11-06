@@ -21,9 +21,9 @@ export class PetService {
     return this.db.collection('pets').doc(petId).delete()
   }
 
-  // Gets the pets for a user one time
-  getUsersPets(userId: string): Observable<any> {
-    return this.db.collection('pets', pet => pet.where('userId', '==', userId)).snapshotChanges()
+  // Gets the pets for a user
+  getUsersPets(email: string): Observable<any> {
+    return this.db.collection('pets', pet => pet.where('sharedWith', 'array-contains', email)).snapshotChanges()
   }
 
   // Daily Log functions
@@ -63,5 +63,23 @@ export class PetService {
 
   deleteWalk(petId: string , dailyLogId: any, walkId: any) {
     return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('walks').doc(walkId).delete()
+  }
+
+  // Notes functions
+  addNote(petId: string , dailyLogId: any, note: any): Promise<any> {
+    return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('notes').add(note)
+  }
+
+  getNotes(petId: string , dailyLogId: any): Observable<any> {
+    return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('notes').snapshotChanges()
+  }
+
+  // Share functions
+  sendShareInvite(invite: any) {
+    return this.db.collection('shareInvites').add(invite);
+  }
+
+  getShareInvites(email: any): Observable<any> {
+    return this.db.collection('shareInvites', invite => invite.where('shareWith', '==', email)).snapshotChanges();
   }
 }

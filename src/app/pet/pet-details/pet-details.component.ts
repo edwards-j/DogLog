@@ -3,6 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { config } from 'rxjs';
 import { PetService } from 'src/app/services/pet.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SharePetFormComponent } from 'src/app/dialogs/share-pet-form/share-pet-form.component';
 
 @Component({
   selector: 'app-pet-details',
@@ -10,11 +13,12 @@ import { PetService } from 'src/app/services/pet.service';
   styleUrls: ['./pet-details.component.css']
 })
 export class PetDetailsComponent implements OnInit {
-  currentPet: any
-  dailyLogs: any
+  currentPet: any;
+  currentUser: any
+  dailyLogs: any;
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar, private petService: PetService) {
+  constructor(private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar, private petService: PetService, private authService: AuthService, private dialog: MatDialog) {
 
     let state = this.router.getCurrentNavigation()!.extras.state
 
@@ -24,6 +28,8 @@ export class PetDetailsComponent implements OnInit {
       snackBar.open('Woof! There was an error Loading Pet Info', 'Close', { verticalPosition: 'top' });
       this.navigateHome()
     }
+
+    this.currentUser = this.authService.getUserDataFromSession();
   }
 
   ngOnInit(): void {
@@ -79,6 +85,10 @@ export class PetDetailsComponent implements OnInit {
     }
 
     this.router.navigate(['pet/dailyLog'], { state: { logData: dailyLogComponentState } })
+  }
+
+  openSharePetForm() {
+    this.dialog.open(SharePetFormComponent, { data: { userEmail: this.currentUser.email } })
   }
 
   deletePet() {

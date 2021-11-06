@@ -1,8 +1,11 @@
-<div class="pet-action-buttons">
+<div *ngIf="this.currentUser.email === this.currentPet.ownerEmail" class="pet-action-buttons">
     <button mat-button class="edit-button">
         <mat-icon>edit</mat-icon>
     </button>
-    <button mat-button class="delete-button" (click)="deletePet()">
+    <button mat-button class="share-pet-button" (click)="openSharePetForm()">
+        <mat-icon>share</mat-icon>
+    </button>
+    <button  mat-button class="delete-button" (click)="deletePet()">
         <mat-icon>delete_outline</mat-icon>
     </button>
 </div>

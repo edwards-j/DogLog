@@ -17,7 +17,8 @@ export class AddPetFormComponent implements OnInit {
       'breed': new FormControl(''),
       'gender': new FormControl(''),
       'birthday': new FormControl(''),
-      'userId': new FormControl(this.data.userId)
+      'ownerEmail': new FormControl(this.data.userEmail),
+      'sharedWith': new FormControl([this.data.userEmail])
     })
    }
 
