@@ -52,8 +52,9 @@ import { MatTreeModule } from '@angular/material/tree';
 import { PetCardComponent } from './pet/pet-card/pet-card.component';
 import { PetDetailsComponent } from './pet/pet-details/pet-details.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { AddPetFormComponent } from './add-pet-form/add-pet-form.component';
+import { AddPetFormComponent } from './dialogs/add-pet-form/add-pet-form.component'
 import { DailyLogComponent } from './daily-log/daily-log.component';
+import { AddOutFormComponent } from './dialogs/add-out-form/add-out-form.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { DailyLogComponent } from './daily-log/daily-log.component';
     PetDetailsComponent,
     NavbarComponent,
     AddPetFormComponent,
-    DailyLogComponent
+    DailyLogComponent,
+    AddOutFormComponent
   ],
   imports: [
     BrowserModule,

@@ -1,24 +1,92 @@
-<button mat-button (click)="deleteDailyLog()">
-    <mat-icon>delete</mat-icon>
-    <span>Delete Daily Log</span>
+<button mat-button class="delete-button" (click)="deleteDailyLog()">
+    <mat-icon>delete_outline</mat-icon>
 </button>
 
 <p>Date: {{dailyLog.date | date: 'shortDate'}}</p>
 <p>Breakfast? {{dailyLog.breakfast}}</p>
 
-<div>
-    <button mat-button (click)="addWalk()">
-        <mat-icon>add_circle</mat-icon>
-        <span>Add Walk</span>
-    </button>
-    <h3>Walks</h3>
-    <mat-card *ngFor="let walk of walks">
-        <mat-card-header>
-            <mat-card-title>{{walk.time | date:'shortDate'}}</mat-card-title>
-            <mat-card-subtitle>Distance: {{walk.distanceMiles}} miles</mat-card-subtitle>
-            <button mat-button (click)="deleteWalk(walk.id)">
-                    <mat-icon>delete</mat-icon>
-                </button>
-        </mat-card-header>
-    </mat-card>
-</div>
+
+<mat-accordion>
+
+    <!-- Times Out Panel -->
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Times Let Out
+            </mat-panel-title>
+            <!-- <mat-panel-description>
+                    This is a summary of the content
+                  </mat-panel-description> -->
+        </mat-expansion-panel-header>
+        <button mat-button (click)="openAddOutDialog()">
+            <mat-icon>add_circle</mat-icon>
+            <span>Add Out</span>
+        </button>
+        <mat-table [dataSource]="outs">
+            <ng-container matColumnDef="time">
+                <mat-header-cell *matHeaderCellDef> Time </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.time | date:'shortTime'}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="pee">
+                <mat-header-cell *matHeaderCellDef> Pee </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <mat-icon *ngIf='row.pee === true'>done</mat-icon>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="poo">
+                <mat-header-cell *matHeaderCellDef> Poo </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <mat-icon *ngIf='row.poo === true'>done</mat-icon>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                            <button mat-button class="delete-button" (click)="deleteOut(row.id)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                    </mat-cell>
+                </ng-container>
+
+            <!-- Header and Row Declarations -->
+            <mat-header-row *matHeaderRowDef="['time', 'pee', 'poo', 'actions']"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: ['time', 'pee', 'poo', 'actions']"></mat-row>
+        </mat-table>
+    </mat-expansion-panel>
+
+    <!-- Walks Panel -->
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Walks
+            </mat-panel-title>
+            <!-- <mat-panel-description>
+          This is a summary of the content
+        </mat-panel-description> -->
+        </mat-expansion-panel-header>
+        <button mat-button (click)="addWalk()">
+            <mat-icon>add_circle</mat-icon>
+            <span>Add Walk</span>
+        </button>
+        <mat-table [dataSource]="walks">
+            <!-- Time Definition -->
+            <ng-container matColumnDef="time">
+                <mat-header-cell *matHeaderCellDef> Time </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.time | date:'shortDate'}} </mat-cell>
+            </ng-container>
+
+            <!-- Distance Definition -->
+            <ng-container matColumnDef="distance">
+                <mat-header-cell *matHeaderCellDef> Distance </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.distanceMiles}} </mat-cell>
+            </ng-container>
+
+            <!-- Header and Row Declarations -->
+            <mat-header-row *matHeaderRowDef="['time', 'distance']"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: ['time', 'distance']"></mat-row>
+        </mat-table>
+    </mat-expansion-panel>
+</mat-accordion>

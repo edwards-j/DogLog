@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { PetService } from '../services/pet.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { AddOutFormComponent } from '../dialogs/add-out-form/add-out-form.component';
 
 @Component({
   selector: 'daily-log',
@@ -10,9 +12,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class DailyLogComponent implements OnInit {
 dailyLog: any;
+outs: any
 walks: any
 
-  constructor(private petService: PetService, private router: Router, private snackBar: MatSnackBar) { 
+  constructor(private petService: PetService, private router: Router, private snackBar: MatSnackBar, private dialog: MatDialog) { 
     let state = this.router.getCurrentNavigation()!.extras.state
 
     if (state) {
@@ -21,8 +24,41 @@ walks: any
   }
 
   ngOnInit(): void {
-    this.getWalks()
+    this.getWalks();
+    this.getOuts();
   }
+
+  getOuts() {
+    this.petService.getOuts(this.dailyLog.petId, this.dailyLog.id).subscribe(res => {
+      this.deleteDailyLog
+      if (res) {
+        this.outs = res.map((d: any) => {
+          return {
+            "id": d.payload.doc.id,
+            "time": d.payload.doc.data().time,
+            "pee": d.payload.doc.data().pee,
+            "poo": d.payload.doc.data().poo
+          }
+        })
+      }
+
+      // Sort so most recent are on top
+      this.outs.sort((a: any, b: any) => {
+        return b.time - a.time
+      })
+    })
+  }
+
+  deleteOut(outId: string) {
+    this.petService.deleteOut(this.dailyLog.petId, this.dailyLog.id, outId).then(() => {
+      this.snackBar.open("Out successfully deleted", '', {duration: 2500})
+    }).catch(err => {
+      this.snackBar.open("Error deleting out", '', {duration: 2500})
+      console.log(err)
+    })
+  }
+
+
 
   getWalks() {
     this.petService.getWalks(this.dailyLog.petId, this.dailyLog.id).subscribe(res => {
@@ -38,12 +74,15 @@ walks: any
     })
   }
 
+  openAddOutDialog() {
+    this.dialog.open(AddOutFormComponent, { data: { petId: this.dailyLog.petId, dailyLogId: this.dailyLog.id} })
+  }
+
   addWalk() {
     const newWalk = {
       time: Date.now(),
       distanceMiles: 2
     }
-
 
     this.petService.addWalk(this.dailyLog.petId, this.dailyLog.id, newWalk)
   }

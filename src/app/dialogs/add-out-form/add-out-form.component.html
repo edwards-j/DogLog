@@ -1,0 +1,9 @@
+<form [formGroup]="addOutForm" (ngSubmit)="addOut()">
+    <div>
+        <mat-checkbox formControlName="pee">Pee</mat-checkbox>
+    </div>
+    <div>
+        <mat-checkbox formControlName="poo">Poo</mat-checkbox>
+    </div>
+    <button mat-raised-button color="primary">Add Out</button>
+</form>

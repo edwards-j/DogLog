@@ -12,6 +12,7 @@ export class PetService {
   }
 
 
+  // Pet functions
   addPet(newPet: any): Promise<any> {
     return this.db.collection('pets').add(newPet)
   }
@@ -25,6 +26,7 @@ export class PetService {
     return this.db.collection('pets', pet => pet.where('userId', '==', userId)).snapshotChanges()
   }
 
+  // Daily Log functions
   getDailyLogs(petId: string): Observable<any> {
     return this.db.collection('pets').doc(petId).collection('dailyLogs').snapshotChanges()
   }
@@ -37,6 +39,20 @@ export class PetService {
     return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).delete()
   }
 
+  // Outs functions
+  getOuts(petId: string , dailyLogId: any): Observable<any> {
+    return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('outs').snapshotChanges()
+  }
+
+  addOut(petId: string , dailyLogId: any, out: any): Promise<any> {
+    return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('outs').add(out)
+  }
+
+  deleteOut(petId: string , dailyLogId: any, outId: any) {
+    return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('outs').doc(outId).delete()
+  }
+
+  // Walk functions
   getWalks(petId: string , dailyLogId: any): Observable<any> {
     return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('walks').snapshotChanges()
   }

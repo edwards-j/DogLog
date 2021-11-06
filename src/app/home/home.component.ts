@@ -4,7 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PetService } from '../services/pet.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { AddPetFormComponent } from '../add-pet-form/add-pet-form.component';
+import { AddPetFormComponent } from '../dialogs/add-pet-form/add-pet-form.component';
 
 @Component({
   selector: 'app-home',
