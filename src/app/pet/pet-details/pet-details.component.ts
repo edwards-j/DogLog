@@ -63,14 +63,14 @@ export class PetDetailsComponent implements OnInit {
   addDailyLog() {
     // Check if there is already a log for today. If so, just return
     if (this.dailyLogs.length > 0) {
-      if (this.dailyLogs[0].date === this.getCurrentDate()) {
+      if ( this.timeConverter(this.dailyLogs[0].date) === this.timeConverter(Date.now())) {
         this.snackBar.open('A log has already been created for today', 'Close', { duration: 2500 })
         return
       }
     }
 
     let dailyLog = {
-      date: this.getCurrentDate(),
+      date: Date.now(),
       breakfast: false,
       dinner: false
     }
@@ -115,5 +115,11 @@ export class PetDetailsComponent implements OnInit {
     const year = dateObj.getFullYear();
 
     return `${month}/${date}/${year}`
+  }
+
+  timeConverter(UNIX_timestamp: number){
+    var a = new Date(0);
+    a.setUTCMilliseconds(UNIX_timestamp)
+    return a.toLocaleDateString()
   }
 }
