@@ -1,13 +1,18 @@
 .sidenav-container {
     background-color: #050535;
     color: white;
-    min-height: 100vh
+    height: 100%;
 }
 
 .side-nav{
     min-width: 150px;
     background-color: #17164E;
     color: white
+}
+
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
 }
 
 .sidenav-buttons {

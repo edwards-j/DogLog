@@ -1,7 +1,3 @@
-.login-wrapper {
-    
-}
-
 .login-form {
     margin: auto;
     width: 80%;
@@ -9,5 +5,40 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center
+    justify-content: center;
+}
+
+.login-form mat-form-field mat-label {
+    color: white
+}
+
+.login-form mat-form-field input {
+    border-color: white
+}
+
+/* input outline color */
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #7B8EFF!important;
+    opacity: 1 !important;
+}
+
+/* mat-input focused color */
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: #01FDF7!important;
+}
+
+/* mat-input error outline color */
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick{
+    color: #F2557A!important;
+    opacity: 0.8!important;
+}
+
+.login-actions {
+    display: flex;
+    justify-content: space-around
+}
+
+.login-button {
+    background-color: #66C4FA;
+    color: white
 }
