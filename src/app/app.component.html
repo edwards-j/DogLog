@@ -1,3 +1,21 @@
-<button mat-button (click)="goBack()"><-- Go Back</button>
-<router-outlet></router-outlet>
-<navbar></navbar>
+<button mat-button (click)="goBack()">
+    <-- Go Back </button> <button mat-button *ngIf="showNavButton" (click)="toggleSideNav()">
+        <mat-icon>menu</mat-icon>
+</button>
+<mat-sidenav-container hasBackdrop class="sidenav-container">
+    <mat-sidenav mode="over" #sidenav *ngIf="showNavButton" class="side-nav">
+        <div class="sidenav-buttons">
+            <button class="nav-button" mat-button (click)="navigateHome()">
+                <mat-icon>pets</mat-icon>
+                <span>Your Pets</span>
+            </button>
+            <button class="nav-button" mat-button (click)="logOut()">
+                <mat-icon>logout</mat-icon>
+                <span>Logout</span>
+            </button>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
