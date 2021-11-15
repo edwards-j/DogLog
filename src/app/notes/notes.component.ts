@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { PetService } from '../services/pet.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-notes',
@@ -16,7 +17,7 @@ export class NotesComponent implements OnInit {
   @Input() notes: any;
   noteForm: FormGroup;
 
-  constructor(private authService: AuthService, private petService: PetService) { 
+  constructor(private authService: AuthService, private petService: PetService, private snackBar: MatSnackBar) { 
     this.userInfo = this.authService.getUserDataFromSession()
 
     this.noteForm = new FormGroup({
@@ -34,6 +35,10 @@ export class NotesComponent implements OnInit {
 
     this.noteForm.patchValue({'time': Date.now()})
 
-    this.petService.addNote(this.petId, this.dailyLogId, this.noteForm.value)
+    this.petService.addNote(this.petId, this.dailyLogId, this.noteForm.value).then(() => {
+      this.noteForm.reset();
+    }).catch(err => {
+      this.snackBar.open("Error adding note", '', { duration: 2500 })
+    })
   }
 }

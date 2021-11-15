@@ -6,6 +6,8 @@ import { PetService } from 'src/app/services/pet.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SharePetFormComponent } from 'src/app/dialogs/share-pet-form/share-pet-form.component';
+import { Pet } from 'src/app/models/pet.model';
+import { DailyLog } from 'src/app/models/daily-log.model';
 
 @Component({
   selector: 'app-pet-details',
@@ -13,9 +15,9 @@ import { SharePetFormComponent } from 'src/app/dialogs/share-pet-form/share-pet-
   styleUrls: ['./pet-details.component.css']
 })
 export class PetDetailsComponent implements OnInit {
-  currentPet: any;
+  currentPet: Pet;
   currentUser: any
-  dailyLogs: any;
+  dailyLogs: DailyLog[];
 
 
   constructor(private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar, private petService: PetService, private authService: AuthService, private dialog: MatDialog) {
@@ -41,15 +43,17 @@ export class PetDetailsComponent implements OnInit {
   }
 
   getDailyLogs() {
-    this.petService.getDailyLogs(this.currentPet.id).subscribe(res => {
+    this.petService.getDailyLogs(this.currentPet.petID).subscribe(res => {
       if (res) {
         this.dailyLogs = res.map((d: any) => {
-          return {
-            "id": d.payload.doc.id,
-            "date": d.payload.doc.data().date,
-            "breakfast": d.payload.doc.data().breakfast,
-            "dinner": d.payload.doc.data().dinner
+          let dailyLog: DailyLog = {
+            dailyLogID: d.payload.doc.id,
+            date: d.payload.doc.data().date,
+            breakfast: d.payload.doc.data().breakfast,
+            dinner: d.payload.doc.data().dinner
           }
+
+          return dailyLog
         })
 
         // Sort the logs in desc order, so newest is at the top
@@ -68,19 +72,19 @@ export class PetDetailsComponent implements OnInit {
         return
       }
     }
-
-    let dailyLog = {
+``
+    let dailyLog: DailyLog = {
       date: Date.now(),
-      breakfast: false,
-      dinner: false
+      breakfast: 0,
+      dinner: 0
     }
 
-    this.petService.addDailyLog(this.currentPet.id, dailyLog)
+    this.petService.addDailyLog(this.currentPet.petID, dailyLog)
   }
 
   navigateToDailyLog(log: any) {
     let dailyLogComponentState = {
-      petId: this.currentPet.id,
+      petId: this.currentPet.petID,
       ...log
     }
 
@@ -95,12 +99,12 @@ export class PetDetailsComponent implements OnInit {
     // If there are daily logs for this pet, we have to delete them first
     if (this.dailyLogs.length > 0) {
       for (let log of this.dailyLogs) {
-        this.petService.deleteDailyLog(this.currentPet.id, log.id)
+        this.petService.deleteDailyLog(this.currentPet.petID, log.dailyLogID)
       }
     }
 
     // Once all the dailyLogs subcollections have been deleted, we can delete the pet
-    this.petService.deletePet(this.currentPet.id).then(() => {
+    this.petService.deletePet(this.currentPet.petID).then(() => {
       this.navigateHome()
       this.snackBar.open('Pet sucessfully deleted', 'Close', { verticalPosition: 'top' });
     }).catch((error) => {

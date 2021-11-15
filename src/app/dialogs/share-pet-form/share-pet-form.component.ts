@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { PetService } from 'src/app/services/pet.service';
+import { ShareInvite } from 'src/app/models/share-invite.model';
 
 @Component({
   selector: 'app-share-pet-form',
@@ -15,7 +16,7 @@ export class SharePetFormComponent implements OnInit {
     this.sharePetForm = new FormGroup({
       'shareWith': new FormControl('', Validators.email),
       'ownerEmail': new FormControl(this.data.userEmail),
-      'time': new FormControl('')
+      'createdDateTime': new FormControl('')
     })
   }
 
@@ -26,9 +27,15 @@ export class SharePetFormComponent implements OnInit {
   sharePet() {
     if (this.sharePetForm.invalid) return
 
-    this.sharePetForm.patchValue({'time': Date.now()})
+    //this.sharePetForm.patchValue({'createdDateTime': Date.now()})
 
-    this.petService.sendShareInvite(this.sharePetForm.value).then((res: any) => {
+    const shareInvite: ShareInvite = {
+      ownerEmail: this.sharePetForm.controls['shareWith'].value,
+      shareWith: this.data.userEmail,
+      createdDateTime: Date.now()
+    }
+
+    this.petService.sendShareInvite(shareInvite).then((res: any) => {
       if (res) {
         this.dialogRef.close()
       }

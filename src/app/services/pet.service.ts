@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { doc, getDoc, query, collection, where, getDocs } from "firebase/firestore";
+import { ShareInvite } from '../models/share-invite.model';
 
 @Injectable({
   providedIn: 'root'
@@ -75,7 +76,7 @@ export class PetService {
   }
 
   // Share functions
-  sendShareInvite(invite: any) {
+  sendShareInvite(invite: ShareInvite) {
     return this.db.collection('shareInvites').add(invite);
   }
 

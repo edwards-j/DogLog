@@ -5,6 +5,7 @@ import { PetService } from '../services/pet.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPetFormComponent } from '../dialogs/add-pet-form/add-pet-form.component';
+import { Pet } from '../models/pet.model';
 
 @Component({
   selector: 'app-home',
@@ -32,11 +33,15 @@ export class HomeComponent implements OnInit {
     this.petService.getUsersPets(this.user.email).subscribe(res => {
 
       this.pets = res.map((d: any) => {
-        return {
-          "id": d.payload.doc.id,
-          "petName": d.payload.doc.data().petName,
-          "ownerEmail": d.payload.doc.data().ownerEmail
+        let pet: Pet = {
+          petID: d.payload.doc.id,
+          petName: d.payload.doc.data().petName,
+          ownerEmail: d.payload.doc.data().ownerEmail,
+          gender: d.payload.doc.data().gender,
+          species: d.payload.doc.data().species
         }
+
+        return pet
       })
     })
   }

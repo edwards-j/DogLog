@@ -45,7 +45,7 @@
             <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                 <mat-cell *matCellDef="let row">
-                    <button mat-button class="delete-button" (click)="deleteOut(row.id)">
+                    <button mat-button class="delete-button" (click)="deleteOut(row.outID)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </mat-cell>
@@ -106,7 +106,7 @@
                 Notes
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <app-notes [petId]='this.dailyLog.petId' [dailyLogId]='this.dailyLog.id' [notes]='this.notes'>
+        <app-notes [petId]='this.dailyLog.petId' [dailyLogId]='this.dailyLog.dailyLogID' [notes]='this.notes'>
         </app-notes>
     </mat-expansion-panel>
 </mat-accordion>
