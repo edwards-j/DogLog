@@ -44,7 +44,7 @@ export class DailyLogComponent implements OnInit {
   }
 
   getOuts() {
-    this.petService.getOuts(this.dailyLog.petId, this.dailyLog.dailyLogID).subscribe(res => {
+    this.petService.getOuts(this.dailyLog.petID, this.dailyLog.dailyLogID).subscribe(res => {
       if (res) {
         this.outs = res.map((d: any) => {
           let out: Out = {
@@ -65,8 +65,8 @@ export class DailyLogComponent implements OnInit {
     })
   }
 
-  deleteOut(outId: string) {
-    this.petService.deleteOut(this.dailyLog.petId, this.dailyLog.dailyLogID, outId).then(() => {
+  deleteOut(outID: string) {
+    this.petService.deleteOut(this.dailyLog.petID, this.dailyLog.dailyLogID, outID).then(() => {
       this.snackBar.open("Out successfully deleted", '', { duration: 2500 })
     }).catch(err => {
       this.snackBar.open("Error deleting out", '', { duration: 2500 })
@@ -75,7 +75,7 @@ export class DailyLogComponent implements OnInit {
   }
 
   getWalks() {
-    this.petService.getWalks(this.dailyLog.petId, this.dailyLog.dailyLogID).subscribe(res => {
+    this.petService.getWalks(this.dailyLog.petID, this.dailyLog.dailyLogID).subscribe(res => {
       if (res) {
         this.walks = res.map((d: any) => {
           return {
@@ -89,7 +89,7 @@ export class DailyLogComponent implements OnInit {
   }
 
   openAddOutDialog() {
-    this.dialog.open(AddOutFormComponent, { data: { petId: this.dailyLog.petId, dailyLogId: this.dailyLog.dailyLogID } })
+    this.dialog.open(AddOutFormComponent, { data: { petID: this.dailyLog.petID, dailyLogID: this.dailyLog.dailyLogID } })
   }
 
   addWalk() {
@@ -97,12 +97,12 @@ export class DailyLogComponent implements OnInit {
       time: Date.now(),
       distanceMiles: 2
     }
-
-    this.petService.addWalk(this.dailyLog.petId, this.dailyLog.id, newWalk)
+    
+    this.petService.addWalk(this.dailyLog.petID, this.dailyLog.dailyLogID, newWalk)
   }
 
-  deleteWalk(walkId: string) {
-    this.petService.deleteWalk(this.dailyLog.petId, this.dailyLog.id, walkId).then(() => {
+  deleteWalk(walkID: string) {
+    this.petService.deleteWalk(this.dailyLog.petID, this.dailyLog.dailyLogID, walkID).then(() => {
       this.snackBar.open("Walk successfully deleted", '', { duration: 2500 })
     }).catch(err => {
       this.snackBar.open("Error deleting walk", '', { duration: 2500 })

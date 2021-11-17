@@ -30,6 +30,7 @@ export class SharePetFormComponent implements OnInit {
     //this.sharePetForm.patchValue({'createdDateTime': Date.now()})
 
     const shareInvite: ShareInvite = {
+      petID: this.data.petID,
       ownerEmail: this.sharePetForm.controls['shareWith'].value,
       shareWith: this.data.userEmail,
       createdDateTime: Date.now()

@@ -13,10 +13,18 @@
             </mat-form-field>
         </p>
         <p>
-            <mat-form-field appearance="outline">
-                <mat-label>Gender</mat-label>
-                <input formControlName="gender" matInput placeholder="Gender">
-            </mat-form-field>
+            <mat-label>Select a gender</mat-label>
+            <mat-radio-group class="gender-radio-group" formControlName="gender">
+                <mat-radio-button class="gender-radio-button" value="male">Male</mat-radio-button>
+                <mat-radio-button class="gender-radio-button" value="female">Female</mat-radio-button>
+            </mat-radio-group>
+        </p>
+        <p>
+            <mat-label>Select a species</mat-label>
+            <mat-radio-group class="species-radio-group" formControlName="species">
+                <mat-radio-button class="species-radio-button" value="dog">Dog</mat-radio-button>
+                <mat-radio-button class="species-radio-button" value="cat">Cat</mat-radio-button>
+            </mat-radio-group>
         </p>
         <!-- <p>
                 <mat-form-field appearance="outline">

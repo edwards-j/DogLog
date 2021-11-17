@@ -72,7 +72,7 @@ export class PetDetailsComponent implements OnInit {
         return
       }
     }
-``
+
     let dailyLog: DailyLog = {
       date: Date.now(),
       breakfast: 0,
@@ -84,7 +84,7 @@ export class PetDetailsComponent implements OnInit {
 
   navigateToDailyLog(log: any) {
     let dailyLogComponentState = {
-      petId: this.currentPet.petID,
+      petID: this.currentPet.petID,
       ...log
     }
 
@@ -92,7 +92,7 @@ export class PetDetailsComponent implements OnInit {
   }
 
   openSharePetForm() {
-    this.dialog.open(SharePetFormComponent, { data: { userEmail: this.currentUser.email } })
+    this.dialog.open(SharePetFormComponent, { data: { userEmail: this.currentUser.email, petID: this.currentPet.petID } })
   }
 
   deletePet() {

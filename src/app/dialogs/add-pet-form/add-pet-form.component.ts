@@ -15,6 +15,7 @@ export class AddPetFormComponent implements OnInit {
     this.addPetForm = new FormGroup({
       'petName': new FormControl('', Validators.required),
       'breed': new FormControl(''),
+      'species': new FormControl(''),
       'gender': new FormControl(''),
       'birthday': new FormControl(''),
       'ownerEmail': new FormControl(this.data.userEmail),

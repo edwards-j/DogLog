@@ -26,7 +26,7 @@ export class AddOutFormComponent implements OnInit {
 
     this.addOutForm.patchValue({'time': Date.now()})
 
-    this.petService.addOut(this.data.petId, this.data.dailyLogId, this.addOutForm.value).then((res: any) => {
+    this.petService.addOut(this.data.petID, this.data.dailyLogID, this.addOutForm.value).then((res: any) => {
       if (res) {
         this.dialogRef.close()
       }
