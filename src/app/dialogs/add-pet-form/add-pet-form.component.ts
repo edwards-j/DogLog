@@ -14,7 +14,7 @@ export class AddPetFormComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private petService: PetService, private dialogRef: MatDialogRef<AddPetFormComponent>) {
     this.addPetForm = new FormGroup({
       'petName': new FormControl('', Validators.required),
-      'breed': new FormControl(''),
+      // 'breed': new FormControl(''),
       'species': new FormControl(''),
       'gender': new FormControl(''),
       'birthday': new FormControl(''),

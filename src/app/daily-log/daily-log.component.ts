@@ -49,14 +49,14 @@ export class DailyLogComponent implements OnInit {
         this.outs = res.map((d: any) => {
           let out: Out = {
             outID: d.payload.doc.id,
-            time: d.payload.doc.data().time,
-            pee: d.payload.doc.data().pee,
-            poo: d.payload.doc.data().poo
+            ...d.payload.doc.data()
           }
 
           return out
         })
       }
+
+      debugger
 
       // Sort so most recent are on top
       this.outs.sort((a: any, b: any) => {

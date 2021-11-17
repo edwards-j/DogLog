@@ -14,8 +14,8 @@ export class AddOutFormComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private petService: PetService, private dialogRef: MatDialogRef<AddOutFormComponent>) {
     this.addOutForm = new FormGroup({
       'time': new FormControl(''),
-      'pee': new FormControl(''),
-      'poo': new FormControl('')
+      'pee': new FormControl(false),
+      'poo': new FormControl(false)
     })
   }
 

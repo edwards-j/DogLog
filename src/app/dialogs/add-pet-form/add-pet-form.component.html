@@ -6,26 +6,27 @@
                 <input formControlName="petName" type="text" matInput placeholder="Pet's Name">
             </mat-form-field>
         </p>
-        <p>
-            <mat-form-field appearance="outline">
-                <mat-label>Breed</mat-label>
-                <input formControlName="breed" matInput placeholder="Breed">
-            </mat-form-field>
-        </p>
-        <p>
-            <mat-label>Select a gender</mat-label>
-            <mat-radio-group class="gender-radio-group" formControlName="gender">
-                <mat-radio-button class="gender-radio-button" value="male">Male</mat-radio-button>
-                <mat-radio-button class="gender-radio-button" value="female">Female</mat-radio-button>
-            </mat-radio-group>
-        </p>
-        <p>
+        <div>
             <mat-label>Select a species</mat-label>
             <mat-radio-group class="species-radio-group" formControlName="species">
                 <mat-radio-button class="species-radio-button" value="dog">Dog</mat-radio-button>
                 <mat-radio-button class="species-radio-button" value="cat">Cat</mat-radio-button>
             </mat-radio-group>
-        </p>
+        </div>
+        <div>
+            <mat-label>Select a gender</mat-label>
+            <mat-radio-group class="gender-radio-group" formControlName="gender">
+                <mat-radio-button class="gender-radio-button" value="male">Male</mat-radio-button>
+                <mat-radio-button class="gender-radio-button" value="female">Female</mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <!-- <div>
+            <mat-form-field appearance="outline">
+                <mat-label>Breed</mat-label>
+                <input formControlName="breed" matInput placeholder="Breed">
+            </mat-form-field>
+        </div> -->
         <!-- <p>
                 <mat-form-field appearance="outline">
                     <mat-label>Birthday</mat-label>
