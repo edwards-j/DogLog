@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { config } from 'rxjs';
@@ -8,17 +8,22 @@ import { MatDialog } from '@angular/material/dialog';
 import { SharePetFormComponent } from 'src/app/dialogs/share-pet-form/share-pet-form.component';
 import { Pet } from 'src/app/models/pet.model';
 import { DailyLog } from 'src/app/models/daily-log.model';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-pet-details',
   templateUrl: './pet-details.component.html',
   styleUrls: ['./pet-details.component.css']
 })
-export class PetDetailsComponent implements OnInit {
+export class PetDetailsComponent implements OnInit, AfterViewInit {
   currentPet: Pet;
   currentUser: any
+  petIconSource: string;
   dailyLogs: DailyLog[];
-
+  displayedColumns: string[] = ['date'];
+  dataSource: MatTableDataSource<DailyLog> = new MatTableDataSource<DailyLog>();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private router: Router, private route: ActivatedRoute, private snackBar: MatSnackBar, private petService: PetService, private authService: AuthService, private dialog: MatDialog) {
 
@@ -32,10 +37,29 @@ export class PetDetailsComponent implements OnInit {
     }
 
     this.currentUser = this.authService.getUserDataFromSession();
+
   }
 
   ngOnInit(): void {
     this.getDailyLogs()
+
+    if (this.currentPet.species === 'dog') {
+      this.petIconSource = '../../../assets/dog.png'
+    }
+
+    switch (this.currentPet.species) {
+      case 'dog':
+        this.petIconSource = '../../../assets/dog.png'
+        break;
+      case 'cat':
+        this.petIconSource = '../../../assets/cat.png'
+        break;
+      default:
+        break;
+    }
+  }
+
+  ngAfterViewInit() {
   }
 
   navigateHome(): void {
@@ -60,6 +84,10 @@ export class PetDetailsComponent implements OnInit {
         this.dailyLogs.sort((a: any, b: any) => {
           return b.date - a.date
         })
+
+        this.dataSource = new MatTableDataSource<DailyLog>(this.dailyLogs);
+
+        this.dataSource.paginator = this.paginator;
       }
     })
   }
@@ -67,7 +95,7 @@ export class PetDetailsComponent implements OnInit {
   addDailyLog() {
     // Check if there is already a log for today. If so, just return
     if (this.dailyLogs.length > 0) {
-      if ( this.timeConverter(this.dailyLogs[0].date) === this.timeConverter(Date.now())) {
+      if (this.timeConverter(this.dailyLogs[0].date) === this.timeConverter(Date.now())) {
         this.snackBar.open('A log has already been created for today', 'Close', { duration: 2500 })
         return
       }
@@ -88,7 +116,7 @@ export class PetDetailsComponent implements OnInit {
       ...log
     }
 
-    this.router.navigate(['pet/dailyLog'], { state: { logData: dailyLogComponentState } })
+    this.router.navigate(['pet/dailyLog'], { state: { logData: dailyLogComponentState, currentPet: this.currentPet } })
   }
 
   openSharePetForm() {
@@ -121,7 +149,7 @@ export class PetDetailsComponent implements OnInit {
     return `${month}/${date}/${year}`
   }
 
-  timeConverter(UNIX_timestamp: number){
+  timeConverter(UNIX_timestamp: number) {
     var a = new Date(0);
     a.setUTCMilliseconds(UNIX_timestamp)
     return a.toLocaleDateString()

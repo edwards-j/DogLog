@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { AddOutFormComponent } from '../dialogs/add-out-form/add-out-form.component';
 import { Out } from '../models/out.model';
+import { Pet } from '../models/pet.model';
 
 @Component({
   selector: 'daily-log',
@@ -13,6 +14,7 @@ import { Out } from '../models/out.model';
 })
 export class DailyLogComponent implements OnInit {
   dailyLog: any;
+  currentPet: Pet;
   outs: Out[]
   walks: any
   notes: any;
@@ -22,6 +24,7 @@ export class DailyLogComponent implements OnInit {
 
     if (state) {
       this.dailyLog = this.router.getCurrentNavigation()!.extras.state!['logData']
+      this.currentPet = this.router.getCurrentNavigation()!.extras.state!['currentPet']
     }
   }
 
@@ -55,8 +58,6 @@ export class DailyLogComponent implements OnInit {
           return out
         })
       }
-
-      debugger
 
       // Sort so most recent are on top
       this.outs.sort((a: any, b: any) => {
@@ -136,8 +137,8 @@ export class DailyLogComponent implements OnInit {
   }
 
   deleteDailyLog() {
-    this.petService.deleteDailyLog(this.dailyLog.petId, this.dailyLog.dailyLogID).then(() => {
-      this.router.navigate(['/pet/' + this.dailyLog.petId])
+    this.petService.deleteDailyLog(this.dailyLog.petID, this.dailyLog.dailyLogID).then(() => {
+      this.router.navigate(['/pet/'], { state: { petData: this.currentPet } })
     })
   }
 

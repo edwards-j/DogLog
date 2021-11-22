@@ -41,6 +41,7 @@
 .daily-logs-header {
     text-align: center;
     margin: 1.5em 0;
+    color: white
 }
 
 .daily-log-card {
@@ -50,6 +51,7 @@
     border-radius: 5px;
     text-align: center;
     font-size: 2em;
+    color: white
 }
 
 .add-button {
@@ -64,4 +66,18 @@
     font-size: 50px;
     line-height: inherit;
     width: inherit
+}
+
+.daily-log-table {
+    color: white;
+    background-color: #050535;
+}
+
+.daily-log-table-wrapper {
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
 }

@@ -27,13 +27,14 @@
                 <input formControlName="breed" matInput placeholder="Breed">
             </mat-form-field>
         </div> -->
-        <!-- <p>
-                <mat-form-field appearance="outline">
-                    <mat-label>Birthday</mat-label>
-                    <input formControlName="birthday" [matDatepicker]="birthdayDatepicker">
-                    <mat-datepicker #birthdayDatepicker></mat-datepicker>
-                </mat-form-field>
-            </p> -->
+        <div>
+            <mat-form-field appearance="outline">
+                <mat-label>Birthday</mat-label>
+                <input formControlName="birthday" matInput [matDatepicker]="birthdayDatepicker">
+                <mat-datepicker-toggle matSuffix [for]="birthdayDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #birthdayDatepicker></mat-datepicker>
+            </mat-form-field>
+        </div>
 
 
         <button mat-raised-button color="primary">Add Pet</button>

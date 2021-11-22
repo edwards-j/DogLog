@@ -28,15 +28,15 @@ export class PetService {
   }
 
   // Daily Log functions
-  getDailyLogs(petId: string): Observable<any> {
+  getDailyLogs(petId: string | undefined): Observable<any> {
     return this.db.collection('pets').doc(petId).collection('dailyLogs').snapshotChanges()
   }
 
-  addDailyLog(petId: string , dailyLog: any): Promise<any> {
+  addDailyLog(petId: string | undefined , dailyLog: any): Promise<any> {
     return this.db.collection('pets').doc(petId).collection('dailyLogs').add(dailyLog)
   }
 
-  deleteDailyLog(petId: string , dailyLogId: any) {
+  deleteDailyLog(petId: string | undefined , dailyLogId: any) {
     return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).delete()
   }
 

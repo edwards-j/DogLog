@@ -5,19 +5,18 @@
     <button mat-button class="share-pet-button" (click)="openSharePetForm()">
         <mat-icon>share</mat-icon>
     </button>
-    <button  mat-button class="delete-button" (click)="deletePet()">
+    <button mat-button class="delete-button" (click)="deletePet()">
         <mat-icon>delete_outline</mat-icon>
     </button>
 </div>
 <div class="pet-details-header">
-    <img class="pet-details-icon" src="../../../assets/dog.png">
+    <img class="pet-details-icon" [src]="petIconSource">
     <h1>{{currentPet.petName}}</h1>
 </div>
 
 <div class="pet-detail-info">
     <div>
-        <p>Age: 6 years</p>
-        <p>Breed: Yellow Lab</p>
+        <p>Birthday: {{currentPet.birthday | date: 'shortDate' }}</p>
     </div>
     <!-- <div>
         <p>Weight: 50lbs</p>
@@ -28,9 +27,31 @@
 
 <!-- <button (click)="addDailyLog()">Add Daily Log</button> -->
 
-<h2 class="daily-logs-header">Daily Logs</h2>
-<div class="daily-log-card" *ngFor="let log of dailyLogs" (click)="navigateToDailyLog(log)">
+<!-- <div class="daily-log-card" *ngFor="let log of dailyLogs" (click)="navigateToDailyLog(log)">
     <div>{{log.date | date:'shortDate'}}</div>
+</div> -->
+
+<div *ngIf="dataSource.data.length > 0" class="daily-log-table-wrapper">
+    <table mat-table class="daily-log-table" [dataSource]="dataSource">
+        <!-- Date Column -->
+        <ng-container matColumnDef="date">
+            <th class="daily-logs-header" mat-header-cell *matHeaderCellDef> Daily Logs </th>
+            <td class="daily-log-card" (click)="navigateToDailyLog(log)" mat-cell *matCellDef="let log">
+                {{log.date | date:'shortDate'}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+    </mat-paginator>
+</div>
+
+<div *ngIf="dataSource.data.length === 0">
+    <p>Doesn't look like {{currentPet.petName}} has any Daily Logs created</p>
+    <p>Press the plus button below to add one</p>
+
 </div>
 
 <button mat-fab class="add-button" (click)="addDailyLog()">

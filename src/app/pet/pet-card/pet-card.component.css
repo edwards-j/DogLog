@@ -8,6 +8,11 @@
     display: flex;
 }
 
+.pet-icon {
+    width: 40px;
+    height: 40px;
+}
+
 .pet-card-icon-section {
     padding: 1em;
     background-color: #7B8EFF;

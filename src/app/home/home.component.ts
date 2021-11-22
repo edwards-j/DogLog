@@ -38,7 +38,9 @@ export class HomeComponent implements OnInit {
           petName: d.payload.doc.data().petName,
           ownerEmail: d.payload.doc.data().ownerEmail,
           gender: d.payload.doc.data().gender,
-          species: d.payload.doc.data().species
+          species: d.payload.doc.data().species,
+          birthday: d.payload.doc.data().birthday,
+          sharedWith: d.payload.doc.data().sharedWith
         }
 
         return pet
