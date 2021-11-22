@@ -9,7 +9,7 @@
 <mat-accordion>
 
     <!-- Times Out Panel -->
-    <mat-expansion-panel>
+    <mat-expansion-panel *ngIf="currentPet.species === 'dog'">
         <mat-expansion-panel-header (click)='outsHeaderClicked()'>
             <mat-panel-title>
                 Times Let Out
@@ -58,7 +58,7 @@
     </mat-expansion-panel>
 
     <!-- Walks Panel -->
-    <mat-expansion-panel>
+    <mat-expansion-panel *ngIf="currentPet.species === 'dog'">
         <mat-expansion-panel-header (click)='walksHeaderClicked()'>
             <mat-panel-title>
                 Walks
@@ -88,7 +88,7 @@
             <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                 <mat-cell *matCellDef="let row">
-                    <button mat-button class="delete-button" (click)="deleteWalk(row.id)">
+                    <button mat-button class="delete-button" (click)="deleteWalk(row.walkID)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </mat-cell>
@@ -106,7 +106,7 @@
                 Notes
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <app-notes [petId]='this.dailyLog.petId' [dailyLogId]='this.dailyLog.dailyLogID' [notes]='this.notes'>
+        <app-notes [petID]='this.dailyLog.petID' [dailyLogID]='this.dailyLog.dailyLogID' [notes]='this.notes'>
         </app-notes>
     </mat-expansion-panel>
 </mat-accordion>

@@ -12,8 +12,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class NotesComponent implements OnInit {
 
   userInfo: any;
-  @Input() petId: any;
-  @Input() dailyLogId: any;
+  @Input() petID: any;
+  @Input() dailyLogID: any;
   @Input() notes: any;
   noteForm: FormGroup;
 
@@ -35,7 +35,7 @@ export class NotesComponent implements OnInit {
 
     this.noteForm.patchValue({'time': Date.now()})
 
-    this.petService.addNote(this.petId, this.dailyLogId, this.noteForm.value).then(() => {
+    this.petService.addNote(this.petID, this.dailyLogID, this.noteForm.value).then(() => {
       this.noteForm.reset();
     }).catch(err => {
       this.snackBar.open("Error adding note", '', { duration: 2500 })

@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddOutFormComponent } from '../dialogs/add-out-form/add-out-form.component';
 import { Out } from '../models/out.model';
 import { Pet } from '../models/pet.model';
+import { Walk } from '../models/walk.model';
 
 @Component({
   selector: 'daily-log',
@@ -16,7 +17,7 @@ export class DailyLogComponent implements OnInit {
   dailyLog: any;
   currentPet: Pet;
   outs: Out[]
-  walks: any
+  walks: Walk[];
   notes: any;
 
   constructor(private petService: PetService, private router: Router, private snackBar: MatSnackBar, private dialog: MatDialog) {
@@ -80,7 +81,7 @@ export class DailyLogComponent implements OnInit {
       if (res) {
         this.walks = res.map((d: any) => {
           return {
-            "id": d.payload.doc.id,
+            "walkID": d.payload.doc.id,
             "time": d.payload.doc.data().time,
             "distanceMiles": d.payload.doc.data().distanceMiles
           }
@@ -102,7 +103,7 @@ export class DailyLogComponent implements OnInit {
     this.petService.addWalk(this.dailyLog.petID, this.dailyLog.dailyLogID, newWalk)
   }
 
-  deleteWalk(walkID: string) {
+  deleteWalk(walkID: string | undefined) {
     this.petService.deleteWalk(this.dailyLog.petID, this.dailyLog.dailyLogID, walkID).then(() => {
       this.snackBar.open("Walk successfully deleted", '', { duration: 2500 })
     }).catch(err => {
@@ -118,11 +119,11 @@ export class DailyLogComponent implements OnInit {
   }
 
   getNotes() {
-    this.petService.getNotes(this.dailyLog.petId, this.dailyLog.dailyLogID).subscribe(res => {
+    this.petService.getNotes(this.dailyLog.petID, this.dailyLog.dailyLogID).subscribe(res => {
       if (res) {
         this.notes = res.map((d: any) => {
           return {
-            "id": d.payload.doc.id,
+            "noteID": d.payload.doc.id,
             "time": d.payload.doc.data().time,
             "message": d.payload.doc.data().message,
             "author": d.payload.doc.data().author,
@@ -137,9 +138,32 @@ export class DailyLogComponent implements OnInit {
   }
 
   deleteDailyLog() {
+    // Need to delete all subcollections before deleting this dailyLog document
+    // This prevents orphaned documents from existing in the database 
+
+    // Delete outs, if any
+    if (this.outs.length > 0) {
+      this.outs.forEach(out => {
+        this.deleteOut(out.outID)
+      })
+    }
+
+    // Delete walks, if any
+    if (this.walks.length > 0) {
+      this.walks.forEach((walk: Walk) => {
+        this.deleteWalk(walk.walkID)
+      });
+    }
+
+    // Delete notes, if any
+    if (this.notes.length > 0) {
+      this.notes.forEach((note: any) => {
+        this.petService.deleteNote(this.dailyLog.petID, this.dailyLog.dailyLogID, note.noteID)
+      })
+    }
+
     this.petService.deleteDailyLog(this.dailyLog.petID, this.dailyLog.dailyLogID).then(() => {
       this.router.navigate(['/pet/'], { state: { petData: this.currentPet } })
     })
   }
-
 }

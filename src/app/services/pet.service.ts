@@ -62,7 +62,7 @@ export class PetService {
     return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('walks').add(walk)
   }
 
-  deleteWalk(petId: string , dailyLogId: any, walkId: any) {
+  deleteWalk(petId: string | undefined , dailyLogId: any, walkId: any) {
     return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('walks').doc(walkId).delete()
   }
 
@@ -73,6 +73,10 @@ export class PetService {
 
   getNotes(petId: string , dailyLogId: any): Observable<any> {
     return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('notes').snapshotChanges()
+  }
+
+  deleteNote(petId: string , dailyLogId: any, noteID: string) {
+    return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('notes').doc(noteID).delete()
   }
 
   // Share functions
