@@ -73,8 +73,7 @@ export class PetDetailsComponent implements OnInit, AfterViewInit {
           let dailyLog: DailyLog = {
             dailyLogID: d.payload.doc.id,
             date: d.payload.doc.data().date,
-            breakfast: d.payload.doc.data().breakfast,
-            dinner: d.payload.doc.data().dinner
+            events: d.payload.doc.data().events
           }
 
           return dailyLog
@@ -103,8 +102,7 @@ export class PetDetailsComponent implements OnInit, AfterViewInit {
 
     let dailyLog: DailyLog = {
       date: Date.now(),
-      breakfast: 0,
-      dinner: 0
+      events: []
     }
 
     this.petService.addDailyLog(this.currentPet.petID, dailyLog)

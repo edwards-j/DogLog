@@ -7,6 +7,7 @@ import { SignupComponent } from './sign-up/sign-up.component'
 import { AuthGuard } from './services/auth.guard';
 import { PetDetailsComponent } from './pet/pet-details/pet-details.component';
 import { DailyLogComponent } from './daily-log/daily-log.component';
+import { DailyLogEventFormComponent } from './daily-log-event-form/daily-log-event-form.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'login', component: LoginComponent},
   {path: 'pet', component: PetDetailsComponent},
-  {path:'pet/dailyLog', component: DailyLogComponent}
+  {path:'pet/dailyLog', component: DailyLogComponent},
+  {path: 'logEvent', component: DailyLogEventFormComponent}
 ];
 
 @NgModule({
