@@ -1,0 +1,8 @@
+.event-form-button-group {
+    display: flex;
+    flex-direction: column
+}
+
+.event-form-button {
+    margin: 1em
+}

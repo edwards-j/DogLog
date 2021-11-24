@@ -54,9 +54,10 @@ import { PetDetailsComponent } from './pet/pet-details/pet-details.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AddPetFormComponent } from './dialogs/add-pet-form/add-pet-form.component'
 import { DailyLogComponent } from './daily-log/daily-log.component';
-import { AddOutFormComponent } from './dialogs/add-out-form/add-out-form.component';
 import { NotesComponent } from './notes/notes.component';
 import { SharePetFormComponent } from './dialogs/share-pet-form/share-pet-form.component';
+import { DailyLogEventFormComponent } from './daily-log-event-form/daily-log-event-form.component';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 
 
 @NgModule({
@@ -70,9 +71,9 @@ import { SharePetFormComponent } from './dialogs/share-pet-form/share-pet-form.c
     NavbarComponent,
     AddPetFormComponent,
     DailyLogComponent,
-    AddOutFormComponent,
     NotesComponent,
-    SharePetFormComponent
+    SharePetFormComponent,
+    DailyLogEventFormComponent
   ],
   imports: [
     BrowserModule,
@@ -123,9 +124,8 @@ import { SharePetFormComponent } from './dialogs/share-pet-form/share-pet-form.c
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule
-
   ],
-  providers: [],
+  providers: [MatBottomSheet],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
