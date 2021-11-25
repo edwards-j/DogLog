@@ -19,6 +19,15 @@ export class DailyLogComponent implements OnInit {
   currentPet: Pet;
   notes: any;
 
+  eventCounts: any = {
+    'food': 0,
+    'water': 0,
+    'treat': 0,
+    'walk': 0,
+    'pee': 0,
+    'poop': 0
+  }
+
   foodCount = 0;
   waterCount = 0;
   treatCount = 0;
@@ -47,26 +56,17 @@ export class DailyLogComponent implements OnInit {
     this.petService.getDailyLogDetails(this.currentPet.petID, this.dailyLog.dailyLogID).subscribe(res => {
       this.dailyLog.events = res.payload.data()!.events
 
-      this.foodCount = 0
-      this.waterCount = 0
-      this.treatCount = 0
+      // Reset all counts to 0
+      for (let event in this.eventCounts) {
+        this.eventCounts[event] = 0
+      }
 
-      this.dailyLog.events.forEach(event => {
-        switch (event.type) {
-          case 'food':
-            this.foodCount++
-            break;
-          case 'water':
-            this.waterCount++
-            break;
-          case 'treat':
-            this.treatCount++
-            break;
-          default:
-            break;
-        }
+      // Update counts
+      this.dailyLog.events.forEach((event: DailyLogEvent) => {
+        this.eventCounts[event.type]++
       })
 
+      // Sort events so newest is on top
       this.dailyLog.events.sort((a, b) => {
         return b.time - a.time
       })

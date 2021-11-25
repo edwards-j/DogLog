@@ -4,17 +4,22 @@
 
 <p>Date: {{dailyLog.date | date: 'shortDate'}}</p>
 
-<div>
-    <h2>Daily Summary</h2>
-    <p>
-        Food: {{foodCount}}
-    </p>
-    <p>
-        Water: {{waterCount}}
-    </p>
-    <p>
-        Treats: {{treatCount}}
-    </p>
+<h2>Daily Summary</h2>
+<div class="summary-wrapper">
+    <div class="summary-row">
+        <p>Food</p>
+        <p>Water</p>
+        <p>Treats</p>
+        <p>Pee</p>
+        <p>Poop</p>
+    </div>
+    <div class="summary-row">
+        <p>{{eventCounts.food}}</p>
+        <p>{{eventCounts.water}}</p>
+        <p>{{eventCounts.treat}}</p>
+        <p>{{eventCounts.pee}}</p>
+        <p>{{eventCounts.poop}}</p>
+    </div>
 </div>
 
 <button mat-button (click)="openAddEventForm()">
