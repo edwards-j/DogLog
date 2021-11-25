@@ -2,6 +2,21 @@
     color: #F2557A
 }
 
+.summary-wrapper {
+    width: 80%;
+    margin: 1em auto;
+    border: 2px solid #7B8EFF;
+    background-color: #17164E;
+    padding: 0.5em;
+    border-radius: 5px
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row
+}
+
 .events-wrapper{
     display: flex;
     flex-direction: column;
