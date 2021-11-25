@@ -71,6 +71,7 @@
 .daily-log-table {
     color: white;
     background-color: #050535;
+    border-spacing: 1.5em;
 }
 
 .daily-log-table-wrapper {

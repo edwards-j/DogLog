@@ -13,6 +13,11 @@
 .nav-buttons {
     display: flex;
     justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background-color: #17164E;
+    z-index: 1000;
+    padding: .5em
 }
 
 .sidenav-buttons {
