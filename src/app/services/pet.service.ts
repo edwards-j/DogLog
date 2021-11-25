@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { doc, getDoc, query, collection, where, getDocs, arrayUnion } from "firebase/firestore";
+import { doc, getDoc, query, collection, where, getDocs, arrayUnion, arrayRemove } from "firebase/firestore";
 import { ShareInvite } from '../models/share-invite.model';
 
 
@@ -47,6 +47,13 @@ export class PetService {
       events: arrayUnion(event)
     })
   }
+
+  deleteDailyLogEvent(petId: string | undefined , dailyLogId: any, event: any) {
+    return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).update({
+      events: arrayRemove(event)
+    })
+  }
+  
 
   getDailyLogDetails(petId: string | undefined , dailyLogId: any) {
     return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).snapshotChanges()

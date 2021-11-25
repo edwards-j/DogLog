@@ -54,28 +54,37 @@ export class DailyLogComponent implements OnInit {
 
   getEvents() {
     this.petService.getDailyLogDetails(this.currentPet.petID, this.dailyLog.dailyLogID).subscribe(res => {
-      this.dailyLog.events = res.payload.data()!.events
-
-      // Reset all counts to 0
-      for (let event in this.eventCounts) {
-        this.eventCounts[event] = 0
+      if (res) {
+        this.dailyLog.events = res.payload.data()!.events
+  
+        // Reset all counts to 0
+        for (let event in this.eventCounts) {
+          this.eventCounts[event] = 0
+        }
+  
+        // Update counts
+        this.dailyLog.events.forEach((event: DailyLogEvent) => {
+          this.eventCounts[event.type]++
+        })
+  
+        // Sort events so newest is on top
+        this.dailyLog.events.sort((a, b) => {
+          return b.time - a.time
+        })
       }
-
-      // Update counts
-      this.dailyLog.events.forEach((event: DailyLogEvent) => {
-        this.eventCounts[event.type]++
-      })
-
-      // Sort events so newest is on top
-      this.dailyLog.events.sort((a, b) => {
-        return b.time - a.time
-      })
     })
+
   }
 
   deleteDailyLog() {
     this.petService.deleteDailyLog(this.dailyLog.petID, this.dailyLog.dailyLogID).then(() => {
       this.router.navigate(['/pet/'], { state: { petData: this.currentPet } })
+    })
+  }
+
+  deleteEvent(event: any) {
+    this.petService.deleteDailyLogEvent(this.dailyLog.petID, this.dailyLog.dailyLogID, event).then(() => {
+      this.snackBar.open('Event deleted', 'Close', { verticalPosition: 'top' });
     })
   }
 

@@ -41,12 +41,6 @@ export class PetDetailsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.getDailyLogs()
-
-    if (this.currentPet.species === 'dog') {
-      this.petIconSource = '../../../assets/dog.png'
-    }
-
     switch (this.currentPet.species) {
       case 'dog':
         this.petIconSource = '../../../assets/dog.png'
@@ -60,6 +54,7 @@ export class PetDetailsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.getDailyLogs()
   }
 
   navigateHome(): void {
@@ -93,12 +88,12 @@ export class PetDetailsComponent implements OnInit, AfterViewInit {
 
   addDailyLog() {
     // Check if there is already a log for today. If so, just return
-    if (this.dailyLogs.length > 0) {
-      if (this.timeConverter(this.dailyLogs[0].date) === this.timeConverter(Date.now())) {
-        this.snackBar.open('A log has already been created for today', 'Close', { duration: 2500 })
-        return
-      }
-    }
+    // if (this.dailyLogs.length > 0) {
+    //   if (this.timeConverter(this.dailyLogs[0].date) === this.timeConverter(Date.now())) {
+    //     this.snackBar.open('A log has already been created for today', 'Close', { duration: 2500 })
+    //     return
+    //   }
+    // }
 
     let dailyLog: DailyLog = {
       date: Date.now(),

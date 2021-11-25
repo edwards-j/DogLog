@@ -31,7 +31,7 @@
     <div>{{log.date | date:'shortDate'}}</div>
 </div> -->
 
-<div *ngIf="dataSource.data.length > 0" class="daily-log-table-wrapper">
+<div class="daily-log-table-wrapper">
     <table mat-table class="daily-log-table" [dataSource]="dataSource">
         <!-- Date Column -->
         <ng-container matColumnDef="date">
@@ -44,7 +44,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-    <mat-paginator [pageSize]="7" showFirstLastButtons>
+    <mat-paginator class="log-table-paginator" [pageSize]="7">
     </mat-paginator>
 </div>
 

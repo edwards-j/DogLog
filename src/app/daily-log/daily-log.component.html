@@ -2,9 +2,11 @@
     <mat-icon>delete_outline</mat-icon>
 </button>
 
-<p>Date: {{dailyLog.date | date: 'shortDate'}}</p>
+<div class="daily-log-header">
+    <p>{{dailyLog.date | date: 'shortDate'}}</p>
+    <h2>Daily Summary</h2>
+</div>
 
-<h2>Daily Summary</h2>
 <div class="summary-wrapper">
     <div class="summary-row">
         <p>Food</p>
@@ -22,18 +24,16 @@
     </div>
 </div>
 
-<button mat-button (click)="openAddEventForm()">
-    <mat-icon>add_circle</mat-icon>
-    <span>Add Event</span>
-</button>
 
-<div class="events-wrapper">
+
+<div class="events-header">
     <h2>Events</h2>
-    <mat-divider></mat-divider>
-
+    <button mat-mini-fab class="add-button" (click)="openAddEventForm()">
+        <mat-icon class="add-icon">add</mat-icon>
+    </button>
+</div>
+<div *ngIf="dailyLog.events.length > 0"  class="events-wrapper">
     <table mat-table [dataSource]="dailyLog.events" class="mat-elevation-z8 events-table">
-        <!--- Note that these columns can be defined in any order.
-                  The actual rendered columns are set as a property on the row definition" -->
 
         <!-- Time Column -->
         <ng-container matColumnDef="time">
@@ -54,7 +54,16 @@
             <mat-cell class="events-table-cell" *matCellDef="let element"> {{element.userEmail}} </mat-cell>
         </ng-container>
 
-        <mat-header-row *matHeaderRowDef="['time', 'type', 'user']"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: ['time', 'type', 'user'];"></mat-row>
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+            <mat-header-cell class="events-table-header" *matHeaderCellDef> </mat-header-cell>
+            <mat-cell class="events-table-cell" *matCellDef="let element"> <button mat-button class="delete-button"
+                    (click)="deleteEvent(element)">
+                    <mat-icon>delete_outline</mat-icon>
+                </button> </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="['time', 'type', 'user', 'actions']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['time', 'type', 'user', 'actions'];"></mat-row>
     </table>
 </div>

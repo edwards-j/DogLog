@@ -2,6 +2,11 @@
     color: #F2557A
 }
 
+.daily-log-header {
+    text-align: center
+}
+
+
 .summary-wrapper {
     width: 80%;
     margin: 1em auto;
@@ -23,6 +28,16 @@
     align-items: center
 }
 
+.events-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 3em auto 1em;
+    border-bottom: 2px solid #7B8EFF;
+    width: 80%;
+}
+
 .events-table {
     width: 90%;
     background-color: #17164E; 
@@ -30,4 +45,15 @@
 
 .events-table-header, .events-table-cell {
     color: white
+}
+
+.add-button {
+    background-color: #72C7A9;
+}
+
+.add-icon {
+    color: #050535;
+    font-size: 35px;
+    line-height: inherit;
+    width: inherit
 }
