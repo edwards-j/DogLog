@@ -36,7 +36,7 @@
         <!-- Date Column -->
         <ng-container matColumnDef="date">
             <th class="daily-logs-header" mat-header-cell *matHeaderCellDef> Daily Logs </th>
-            <td class="daily-log-card mat-elevation-z8" (click)="navigateToDailyLog(log)" mat-cell *matCellDef="let log">
+            <td class="daily-log-card mat-elevation-z8 animate__animated animate__jackInTheBox" (click)="navigateToDailyLog(log)" mat-cell *matCellDef="let log">
                 {{log.date | date:'shortDate'}} </td>
         </ng-container>
 

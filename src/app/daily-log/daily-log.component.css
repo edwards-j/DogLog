@@ -2,10 +2,13 @@
     color: #F2557A
 }
 
+.edit-button {
+    color: #EC8ECE;
+}
+
 .daily-log-header {
     text-align: center
 }
-
 
 .summary-wrapper {
     width: 80%;
@@ -40,10 +43,31 @@
 
 .events-table {
     width: 90%;
+    margin: auto;
+}
+
+.events-panel, 
+.events-panel:hover, 
+.mat-expansion-panel:not(.mat-expanded):not([aria-disabled=true]) 
+.mat-expansion-panel-header:hover  {
     background-color: #17164E; 
 }
 
-.events-table-header, .events-table-cell {
+.mat-expansion-indicator::after {
+    color: #66C4FA !important
+}
+
+.event-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.events-panel-header {
+    color: white
+}
+
+.events-panel-content {
     color: white
 }
 

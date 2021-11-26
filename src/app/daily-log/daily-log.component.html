@@ -32,38 +32,28 @@
         <mat-icon class="add-icon">add</mat-icon>
     </button>
 </div>
-<div *ngIf="dailyLog.events.length > 0"  class="events-wrapper">
-    <table mat-table [dataSource]="dailyLog.events" class="mat-elevation-z8 events-table">
 
-        <!-- Time Column -->
-        <ng-container matColumnDef="time">
-            <mat-header-cell class="events-table-header" *matHeaderCellDef> Time </mat-header-cell>
-            <mat-cell class="events-table-cell" *matCellDef="let element"> {{element.time | date: 'shortTime'}}
-            </mat-cell>
-        </ng-container>
-
-        <!-- Type Column -->
-        <ng-container matColumnDef="type">
-            <mat-header-cell class="events-table-header" *matHeaderCellDef> Type </mat-header-cell>
-            <mat-cell class="events-table-cell" *matCellDef="let element"> {{element.type}} </mat-cell>
-        </ng-container>
-
-        <!-- User Column -->
-        <ng-container matColumnDef="user">
-            <mat-header-cell class="events-table-header" *matHeaderCellDef> User </mat-header-cell>
-            <mat-cell class="events-table-cell" *matCellDef="let element"> {{element.userEmail}} </mat-cell>
-        </ng-container>
-
-        <!-- Actions Column -->
-        <ng-container matColumnDef="actions">
-            <mat-header-cell class="events-table-header" *matHeaderCellDef> </mat-header-cell>
-            <mat-cell class="events-table-cell" *matCellDef="let element"> <button mat-button class="delete-button"
-                    (click)="deleteEvent(element)">
+<div class="events-table">
+    <mat-expansion-panel class="events-panel" *ngFor="let logEvent of dailyLog.events">
+        <mat-expansion-panel-header class="events-panel">
+            <mat-panel-title class="events-panel-header">
+                {{logEvent.time | date: 'shortTime'}}
+            </mat-panel-title>
+            <mat-panel-description class="events-panel-header">
+                {{logEvent.type}}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="events-panel-content">
+            <p>This is the primary content of the panel.</p>
+            <p>{{logEvent.userEmail}}</p>
+            <div class="event-buttons">
+                <button mat-button class="edit-button">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-button class="delete-button" (click)="deleteEvent(logEvent)">
                     <mat-icon>delete_outline</mat-icon>
-                </button> </mat-cell>
-        </ng-container>
-
-        <mat-header-row *matHeaderRowDef="['time', 'type', 'user', 'actions']"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: ['time', 'type', 'user', 'actions'];"></mat-row>
-    </table>
+                </button>
+            </div>
+        </div>
+    </mat-expansion-panel>
 </div>

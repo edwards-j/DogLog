@@ -11,6 +11,7 @@ import { DailyLog } from 'src/app/models/daily-log.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
+
 @Component({
   selector: 'app-pet-details',
   templateUrl: './pet-details.component.html',
