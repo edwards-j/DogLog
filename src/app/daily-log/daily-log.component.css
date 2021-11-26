@@ -53,6 +53,10 @@
     background-color: #17164E; 
 }
 
+.events-panel {
+    margin: 1em 0;
+}
+
 .mat-expansion-indicator::after {
     color: #66C4FA !important
 }
@@ -66,9 +70,27 @@
 .events-panel-header {
     color: white
 }
+.events-panel-desc {
+    color: white;
+    justify-content: space-between;
+    margin: 0;
+}
 
 .events-panel-content {
     color: white
+}
+
+.event-created-by {
+    font-size: 12px;
+    font-weight: bold;
+    color: #7B8EFF;
+}
+
+.events-panel-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline
 }
 
 .add-button {
