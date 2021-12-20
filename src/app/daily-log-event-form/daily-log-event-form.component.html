@@ -1,26 +1,31 @@
 <div>
     <form [formGroup]="addEventForm" (ngSubmit)="addDailyLogEvent()">
         <div>
-            <mat-label>Select an event</mat-label>
             <mat-radio-group class="event-form-button-group" formControlName="type">
                 <mat-label>Diet</mat-label>
-                <mat-radio-button class="event-form-button" value="food">Food</mat-radio-button>
-                <mat-radio-button class="event-form-button" value="water">Water</mat-radio-button>
-                <mat-radio-button class="event-form-button" value="treat">Treat</mat-radio-button>
+                <div class="event-button-section">
+                    <mat-radio-button class="event-form-button" value="food">Food</mat-radio-button>
+                    <mat-radio-button class="event-form-button" value="water">Water</mat-radio-button>
+                    <mat-radio-button class="event-form-button" value="treat">Treat</mat-radio-button>
+                </div>
                 <mat-label>Outside</mat-label>
-                <mat-radio-button class="event-form-button" value="walk">Walk</mat-radio-button>
-                <mat-radio-button class="event-form-button" value="pee">Pee</mat-radio-button>
-                <mat-radio-button class="event-form-button" value="poop">Poop</mat-radio-button>
-                <mat-label>Medicine</mat-label>
-                <mat-radio-button class="event-form-button" value="medicine">Medicine</mat-radio-button>
+                <div class="event-button-section">
+                    <mat-radio-button class="event-form-button" value="walk">Walk</mat-radio-button>
+                    <mat-radio-button class="event-form-button" value="pee">Pee</mat-radio-button>
+                    <mat-radio-button class="event-form-button" value="poop">Poop</mat-radio-button>
+                </div>
+                <mat-label>Other</mat-label>
+                <div class="event-button-section">
+                    <mat-radio-button class="event-form-button" value="medicine">Medicine</mat-radio-button>
+                </div>
             </mat-radio-group>
         </div>
 
-        <div appearance="outline">
+        <div class="event-notes" appearance="outline">
             <mat-label>Notes</mat-label>
-            <input formControlName="notes" type="text" matInput placeholder="Notes">
+            <textarea formControlName="notes" rows="4" type="text" matInput placeholder="Notes"></textarea>
         </div>
 
-        <button type="submit" mat-raised-button color="primary">Save Event</button>
+        <button class="save-event-button" type="submit" mat-raised-button color="primary">Save Event</button>
     </form>
 </div>

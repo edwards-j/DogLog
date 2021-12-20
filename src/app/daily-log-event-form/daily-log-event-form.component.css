@@ -1,8 +1,33 @@
+form {
+    /* background-color: #17164E;
+    color: white; */
+}
+
 .event-form-button-group {
     display: flex;
     flex-direction: column
 }
 
+.event-form-button-group > mat-label {
+    margin: 1em 0;
+    border-bottom: 1px solid black
+}
+
+.event-button-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around
+}
+
 .event-form-button {
     margin: 1em
+}
+
+.event-notes {
+    display: flex;
+    flex-direction: column
+}
+
+.save-event-button {
+    margin: 1em 0;
 }
