@@ -88,7 +88,7 @@ export class DailyLogComponent implements OnInit {
 
   deleteEvent(event: any) {
     this.petService.deleteDailyLogEvent(this.dailyLog.petID, this.dailyLog.dailyLogID, event).then(() => {
-      this.snackBar.open('Event deleted', 'Close', { verticalPosition: 'top' });
+      this.snackBar.open('Event deleted', 'Close', { verticalPosition: 'top', duration: 3000 });
     })
   }
 
