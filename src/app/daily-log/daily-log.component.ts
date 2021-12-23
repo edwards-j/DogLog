@@ -8,6 +8,7 @@ import { DailyLogEvent } from '../models/daily-log-event.model';
 import { DailyLog } from '../models/daily-log.model';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { DailyLogEventFormComponent } from '../daily-log-event-form/daily-log-event-form.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'daily-log',
@@ -18,6 +19,7 @@ export class DailyLogComponent implements OnInit {
   dailyLog: DailyLog;
   currentPet: Pet;
   notes: any;
+  user: any;
 
   eventCounts: any = {
     'food': 0,
@@ -32,7 +34,7 @@ export class DailyLogComponent implements OnInit {
   waterCount = 0;
   treatCount = 0;
 
-  constructor(private petService: PetService, private router: Router, private snackBar: MatSnackBar, private dialog: MatDialog, private bottomSheet: MatBottomSheet) {
+  constructor(private authService: AuthService, private petService: PetService, private router: Router, private snackBar: MatSnackBar, private dialog: MatDialog, private bottomSheet: MatBottomSheet) {
     let state = this.router.getCurrentNavigation()!.extras.state
 
     if (state) {
@@ -42,6 +44,8 @@ export class DailyLogComponent implements OnInit {
       snackBar.open('Woof! There was an error Loading Pet Info', 'Close', { verticalPosition: 'top' });
       this.navigateHome()
     }
+
+    this.user = this.authService.getUserDataFromSession()
   }
 
   ngOnInit(): void {
@@ -56,17 +60,17 @@ export class DailyLogComponent implements OnInit {
     this.petService.getDailyLogDetails(this.currentPet.petID, this.dailyLog.dailyLogID).subscribe(res => {
       if (res) {
         this.dailyLog.events = res.payload.data()!.events
-  
+
         // Reset all counts to 0
         for (let event in this.eventCounts) {
           this.eventCounts[event] = 0
         }
-  
+
         // Update counts
         this.dailyLog.events.forEach((event: DailyLogEvent) => {
           this.eventCounts[event.type]++
         })
-  
+
         // Sort events so newest is on top
         this.dailyLog.events.sort((a, b) => {
           return b.time - a.time

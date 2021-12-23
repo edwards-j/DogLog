@@ -5,4 +5,5 @@ export class ShareInvite {
     ownerEmail: string;
     shareWith: string;
     createdDateTime: number; // Unix Time
+    seen: boolean;
 }

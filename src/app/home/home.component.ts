@@ -59,25 +59,9 @@ export class HomeComponent implements OnInit {
   }
 
   checkForShareInvite() {
-    this.petService.getShareInvites(this.user.email).subscribe(res => {
-      if (res) {
-        this.shareInvites = res.docs.map((d: any) => {
-          return {
-            "time": d.data().time,
-            "petName": d.data().shareWith,
-            "ownerEmail": d.data().ownerEmail
-          }
-        })
-
-        if (this.shareInvites.length > 0) {
-          let _openedSnackBarRef = this.snackBar.open(`You have ${this.shareInvites.length} pet share invites pending`, 'Close', { verticalPosition: 'top' });
-
-          _openedSnackBarRef.onAction().subscribe(
-            () => {
-              console.log('snackbar action button clicked')
-            }
-          );
-        }
+    this.petService.getUnseenShareInvites(this.user.email).subscribe(res => {
+      if (!res.empty) {
+        this.snackBar.open(`You have a new pet share invites`, 'Close', { verticalPosition: 'top', duration: 3000 });
       }
     })
   }

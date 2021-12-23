@@ -34,7 +34,8 @@ export class SharePetFormComponent implements OnInit {
       petName: this.data.petName,
       shareWith: this.sharePetForm.controls['shareWith'].value,
       ownerEmail: this.data.userEmail,
-      createdDateTime: Date.now()
+      createdDateTime: Date.now(),
+      seen: false
     }
 
     this.petService.sendShareInvite(shareInvite).then((res: any) => {

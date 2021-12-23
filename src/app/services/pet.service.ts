@@ -13,7 +13,6 @@ export class PetService {
   constructor(private db: AngularFirestore) {
   }
 
-
   // Pet functions
   addPet(newPet: any): Promise<any> {
     return this.db.collection('pets').add(newPet)
@@ -59,51 +58,28 @@ export class PetService {
     return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).snapshotChanges()
   }
 
-  // Outs functions
-  getOuts(petId: string , dailyLogId: any): Observable<any> {
-    return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('outs').snapshotChanges()
-  }
-
-  addOut(petId: string , dailyLogId: any, out: any): Promise<any> {
-    return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('outs').add(out)
-  }
-
-  deleteOut(petId: string , dailyLogId: any, outId: any) {
-    return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('outs').doc(outId).delete()
-  }
-
-  // Walk functions
-  getWalks(petId: string , dailyLogId: any): Observable<any> {
-    return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('walks').snapshotChanges()
-  }
-
-  addWalk(petId: string , dailyLogId: any, walk: any): Promise<any> {
-    return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('walks').add(walk)
-  }
-
-  deleteWalk(petId: string | undefined , dailyLogId: any, walkId: any) {
-    return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('walks').doc(walkId).delete()
-  }
-
-  // Notes functions
-  addNote(petId: string , dailyLogId: any, note: any): Promise<any> {
-    return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('notes').add(note)
-  }
-
-  getNotes(petId: string , dailyLogId: any): Observable<any> {
-    return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('notes').snapshotChanges()
-  }
-
-  deleteNote(petId: string , dailyLogId: any, noteID: string) {
-    return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).collection('notes').doc(noteID).delete()
-  }
-
   // Share functions
   sendShareInvite(invite: ShareInvite) {
     return this.db.collection('shareInvites').add(invite);
   }
 
   getShareInvites(email: any): Observable<any> {
-    return this.db.collection('shareInvites', invite => invite.where('shareWith', '==', email)).get();
+    return this.db.collection('shareInvites', invite => invite.where('shareWith', '==', email)).snapshotChanges();
+  }
+
+  getUnseenShareInvites(email: any): Observable<any> {
+    return this.db.collection('shareInvites', invite => invite.where('shareWith', '==', email).where('seen','==', false)).get();
+  }
+
+  markInviteAsSeen(inviteID: string | undefined) {
+    return this.db.collection('shareInvites').doc(inviteID).update({seen: true});
+  }
+
+  addUserToPet(petID: string, email: string) {
+    return this.db.collection('pets').doc(petID).update({sharedWith: arrayUnion(email)})
+  }
+
+  deleteShareInvite(inviteID: string | undefined) {
+    return this.db.collection('shareInvites').doc(inviteID).delete();
   }
 }
