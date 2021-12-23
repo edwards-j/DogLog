@@ -1,9 +1,13 @@
 <mat-sidenav-container hasBackdrop class="sidenav-container">
     <mat-sidenav mode="over" #sidenav *ngIf="showNavButton" class="side-nav">
         <div class="sidenav-buttons">
-            <button class="nav-button" mat-button (click)="navigateHome()">
+            <button class="nav-button" mat-button (click)="navigateToRoute('home')">
                 <mat-icon>pets</mat-icon>
                 <span> Your Pets</span>
+            </button>
+            <button class="nav-button" mat-button (click)="navigateToRoute('shareInvites')">
+                <mat-icon>share</mat-icon>
+                <span> Share Invites</span>
             </button>
             <button class="nav-button" mat-button (click)="logOut()">
                 <mat-icon>logout</mat-icon>

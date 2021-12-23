@@ -104,6 +104,6 @@ export class PetService {
   }
 
   getShareInvites(email: any): Observable<any> {
-    return this.db.collection('shareInvites', invite => invite.where('shareWith', '==', email)).snapshotChanges();
+    return this.db.collection('shareInvites', invite => invite.where('shareWith', '==', email)).get();
   }
 }

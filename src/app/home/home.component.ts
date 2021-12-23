@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPetFormComponent } from '../dialogs/add-pet-form/add-pet-form.component';
 import { Pet } from '../models/pet.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -15,9 +16,10 @@ import { Pet } from '../models/pet.model';
 export class HomeComponent implements OnInit {
 
   pets: any;
-  user: any
+  user: any;
+  shareInvites: any[];
 
-  constructor(private authService: AuthService, private petService: PetService, private router: Router, private dialog: MatDialog) {
+  constructor(private authService: AuthService, private petService: PetService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar) {
 
 
     this.pets = [];
@@ -59,14 +61,23 @@ export class HomeComponent implements OnInit {
   checkForShareInvite() {
     this.petService.getShareInvites(this.user.email).subscribe(res => {
       if (res) {
-        res.map((d: any) => {
-          console.log(d.payload.doc.data())
-          // return {
-          //   "time": d.payload.doc.data().time,
-          //   "petName": d.payload.doc.data().shareWith,
-          //   "ownerEmail": d.payload.doc.data().ownerEmail
-          // }
+        this.shareInvites = res.docs.map((d: any) => {
+          return {
+            "time": d.data().time,
+            "petName": d.data().shareWith,
+            "ownerEmail": d.data().ownerEmail
+          }
         })
+
+        if (this.shareInvites.length > 0) {
+          let _openedSnackBarRef = this.snackBar.open(`You have ${this.shareInvites.length} pet share invites pending`, 'Close', { verticalPosition: 'top' });
+
+          _openedSnackBarRef.onAction().subscribe(
+            () => {
+              console.log('snackbar action button clicked')
+            }
+          );
+        }
       }
     })
   }

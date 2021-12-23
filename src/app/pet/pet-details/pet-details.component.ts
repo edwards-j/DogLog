@@ -114,7 +114,7 @@ export class PetDetailsComponent implements OnInit, AfterViewInit {
   }
 
   openSharePetForm() {
-    this.dialog.open(SharePetFormComponent, { data: { userEmail: this.currentUser.email, petID: this.currentPet.petID } })
+    this.dialog.open(SharePetFormComponent, { data: { userEmail: this.currentUser.email, petID: this.currentPet.petID, petName: this.currentPet.petName } })
   }
 
   deletePet() {

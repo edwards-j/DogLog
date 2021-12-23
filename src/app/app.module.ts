@@ -51,13 +51,12 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { PetCardComponent } from './pet/pet-card/pet-card.component';
 import { PetDetailsComponent } from './pet/pet-details/pet-details.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { AddPetFormComponent } from './dialogs/add-pet-form/add-pet-form.component'
 import { DailyLogComponent } from './daily-log/daily-log.component';
-import { NotesComponent } from './notes/notes.component';
 import { SharePetFormComponent } from './dialogs/share-pet-form/share-pet-form.component';
 import { DailyLogEventFormComponent } from './daily-log-event-form/daily-log-event-form.component';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { ShareInvitesComponent } from './share-invites/share-invites.component';
 
 
 @NgModule({
@@ -68,12 +67,11 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
     LoginComponent,
     PetCardComponent,
     PetDetailsComponent,
-    NavbarComponent,
     AddPetFormComponent,
     DailyLogComponent,
-    NotesComponent,
     SharePetFormComponent,
-    DailyLogEventFormComponent
+    DailyLogEventFormComponent,
+    ShareInvitesComponent
   ],
   imports: [
     BrowserModule,

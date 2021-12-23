@@ -1,0 +1,9 @@
+<h1>invites</h1>
+
+<div *ngFor="let invite of shareInvites">
+    <p>{{invite.createdDateTime | date: 'shortTime'}}</p>
+    <p>{{invite.petName}}</p>
+    <p>{{invite.ownerEmail}}</p>
+    <button mat-raised-button>Accept</button>
+    <button mat-raised-button>Delete</button>
+</div>

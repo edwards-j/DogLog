@@ -8,6 +8,7 @@ import { AuthGuard } from './services/auth.guard';
 import { PetDetailsComponent } from './pet/pet-details/pet-details.component';
 import { DailyLogComponent } from './daily-log/daily-log.component';
 import { DailyLogEventFormComponent } from './daily-log-event-form/daily-log-event-form.component';
+import { ShareInvitesComponent } from './share-invites/share-invites.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'pet', component: PetDetailsComponent},
   {path:'pet/dailyLog', component: DailyLogComponent},
-  {path: 'logEvent', component: DailyLogEventFormComponent}
+  {path: 'logEvent', component: DailyLogEventFormComponent},
+  {path: 'shareInvites', component: ShareInvitesComponent}
 ];
 
 @NgModule({
@@ -24,3 +26,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+``

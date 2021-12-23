@@ -29,6 +29,12 @@ export class AppComponent {
     this.sidenav.toggle()
   }
 
+  navigateToRoute(route: string) {
+    this.router.navigate([`/${route}`]).then(() => {
+      this.toggleSideNav()
+    })
+  }
+
   navigateHome(): void {
     this.router.navigate(['/home']).then(() => {
       this.toggleSideNav()
