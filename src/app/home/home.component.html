@@ -4,7 +4,7 @@
     </div>
 
 
-    <pet-card *ngFor="let pet of pets" [petInfo]="pet" (click)="navigateToPetDeail(pet)"></pet-card>
+    <pet-card *ngFor="let pet of pets" [petInfo]="pet" (click)="navigateToPetDetail(pet)"></pet-card>
 
     <button mat-fab class="add-button" (click)="openAddPetDialog()">
         <mat-icon class="add-icon">add</mat-icon>

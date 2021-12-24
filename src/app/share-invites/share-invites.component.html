@@ -1,9 +1,10 @@
-<h1>invites</h1>
+<h2>Pending Invites</h2>
 
+<p *ngIf="shareInvites.length === 0">You have no pending invites</p>
 <div *ngFor="let invite of shareInvites">
-    <p>{{invite.createdDateTime | date: 'shortTime'}}</p>
-    <p>{{invite.petName}}</p>
-    <p>{{invite.ownerEmail}}</p>
-    <button mat-raised-button (click)="acceptInvite(invite.petID, invite.petName, invite.shareInviteID)">Accept</button>
-    <button mat-raised-button>Delete</button>
+    <p>Time Sent: {{invite.createdDateTime | date: 'shortTime'}}</p>
+    <p>Pet: {{invite.petName}}</p>
+    <p>From: {{invite.ownerEmail}}</p>
+    <button mat-raised-button (click)="acceptInvite(invite.petID, invite.petName, invite.shareInviteID)"><mat-icon>check_circle</mat-icon></button>
+    <button mat-raised-button (click)="deleteInvite(invite.shareInviteID)"><mat-icon>delete_outline</mat-icon></button>
 </div>

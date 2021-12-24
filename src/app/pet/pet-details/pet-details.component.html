@@ -16,12 +16,10 @@
 
 <div class="pet-detail-info">
     <div>
-        <p>Birthday: {{currentPet.birthday | date: 'shortDate' }}</p>
+        <p *ngIf="currentPet.ownerEmail !== currentUser.email">Primary Owner: {{currentPet.ownerEmail}}</p>
+        <p>Shared with:</p>
+        <p *ngFor="let email of currentPet.sharedWith"><span *ngIf="email !== currentUser.email">{{email}}</span></p>
     </div>
-    <!-- <div>
-        <p>Weight: 50lbs</p>
-        <p>Miles Walked: 100</p>
-    </div> -->
 </div>
 
 
@@ -36,7 +34,8 @@
         <!-- Date Column -->
         <ng-container matColumnDef="date">
             <th class="daily-logs-header" mat-header-cell *matHeaderCellDef> Daily Logs </th>
-            <td class="daily-log-card mat-elevation-z8" (click)="navigateToDailyLog(log)" mat-cell *matCellDef="let log">
+            <td class="daily-log-card mat-elevation-z8" (click)="navigateToDailyLog(log)" mat-cell
+                *matCellDef="let log">
                 {{log.date | date:'shortDate'}} </td>
         </ng-container>
 

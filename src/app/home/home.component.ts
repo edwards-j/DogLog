@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  navigateToPetDeail(pet: any) {
+  navigateToPetDetail(pet: any) {
     this.router.navigate(['/pet/'], { state: { petData: pet } })
   }
 
