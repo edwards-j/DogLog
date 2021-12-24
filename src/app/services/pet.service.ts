@@ -71,6 +71,10 @@ export class PetService {
     return this.db.collection('shareInvites', invite => invite.where('shareWith', '==', email).where('seen','==', false)).get();
   }
 
+  getUnseenShareInvitesStream(email: any): Observable<any> {
+    return this.db.collection('shareInvites', invite => invite.where('shareWith', '==', email).where('seen','==', false)).snapshotChanges();
+  }
+
   markInviteAsSeen(inviteID: string | undefined) {
     return this.db.collection('shareInvites').doc(inviteID).update({seen: true});
   }

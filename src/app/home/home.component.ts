@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { PetService } from '../services/pet.service';
@@ -7,28 +7,34 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddPetFormComponent } from '../dialogs/add-pet-form/add-pet-form.component';
 import { Pet } from '../models/pet.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   pets: any;
   user: any;
   shareInvites: any[];
+  shareInviteStream$: Subscription;
 
   constructor(private authService: AuthService, private petService: PetService, private router: Router, private dialog: MatDialog, private snackBar: MatSnackBar) {
 
 
     this.pets = [];
-    this.user = this.authService.getUserDataFromSession()
+    this.user = this.authService.getUserDataFromSession();
   }
 
   ngOnInit(): void {
     this.getPets();
-    this.checkForShareInvite();
+    this.listenForShareInvite();
+  }
+
+  ngOnDestroy() {
+    this.shareInviteStream$.unsubscribe();
   }
 
   getPets() {
@@ -45,23 +51,26 @@ export class HomeComponent implements OnInit {
           sharedWith: d.payload.doc.data().sharedWith
         }
 
-        return pet
+        return pet;
       })
     })
   }
 
   navigateToPetDetail(pet: any) {
-    this.router.navigate(['/pet/'], { state: { petData: pet } })
+    this.router.navigate(['/pet/'], { state: { petData: pet } });
   }
 
   openAddPetDialog() {
-    this.dialog.open(AddPetFormComponent, { data: { userEmail: this.user.email } })
+    this.dialog.open(AddPetFormComponent, { data: { userEmail: this.user.email } });
   }
 
-  checkForShareInvite() {
-    this.petService.getUnseenShareInvites(this.user.email).subscribe(res => {
-      if (!res.empty) {
-        this.snackBar.open(`You have a new pet share invites`, 'Close', { verticalPosition: 'top', duration: 3000 });
+  listenForShareInvite() {
+    this.shareInviteStream$ = this.petService.getUnseenShareInvitesStream(this.user.email).subscribe(res => {
+      if (res.length > 0 && res[0].type === 'added') {
+        let snack = this.snackBar.open(`You have a new pet share invite`, 'View', { verticalPosition: 'top', duration: 3000 });
+        snack.onAction().subscribe(() => {
+          this.router.navigate(['/shareInvites']);
+        })
       }
     })
   }
