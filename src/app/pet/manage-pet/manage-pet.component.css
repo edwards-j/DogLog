@@ -1,0 +1,15 @@
+.shared-with-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.share-pet-button {
+    color: #72C7A9
+}
+
+.delete-button{
+    color: #F2557A
+}

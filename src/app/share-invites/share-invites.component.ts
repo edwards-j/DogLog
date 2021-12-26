@@ -21,7 +21,7 @@ export class ShareInvitesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.shareInvites = []
+    this.shareInvites = [];
     this.getShareInvites();
   }
 

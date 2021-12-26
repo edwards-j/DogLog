@@ -1,0 +1,28 @@
+<p>{{currentPet.petName}}'s Info </p>
+
+<button mat-button class="share-pet-button" (click)="openSharePetForm()">
+    <mat-icon>share</mat-icon>
+</button>
+<!-- <button mat-button class="delete-button" (click)="deletePet()">
+    <mat-icon>delete_outline</mat-icon>
+</button> -->
+
+<div>
+    <p>Shared With</p>
+    <div class="shared-with-list" *ngFor="let user of currentPet.sharedWith">
+        <p>{{user}} </p>
+        <button mat-button class="delete-button" (click)="removeShare(user)">
+            <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+    </div>
+</div>
+
+<div>
+    <p>Event Types</p>
+    <!-- 
+        
+        Event type options could be stored on the level, then when a new daily log, those events are also created with that daily log
+        This way, incase the events change in the future, the log values are correct for that day
+    
+    -->
+</div>

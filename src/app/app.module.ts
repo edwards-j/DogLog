@@ -57,6 +57,7 @@ import { SharePetFormComponent } from './dialogs/share-pet-form/share-pet-form.c
 import { DailyLogEventFormComponent } from './daily-log-event-form/daily-log-event-form.component';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ShareInvitesComponent } from './share-invites/share-invites.component';
+import { ManagePetComponent } from './pet/manage-pet/manage-pet.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { ShareInvitesComponent } from './share-invites/share-invites.component';
     DailyLogComponent,
     SharePetFormComponent,
     DailyLogEventFormComponent,
-    ShareInvitesComponent
+    ShareInvitesComponent,
+    ManagePetComponent
   ],
   imports: [
     BrowserModule,

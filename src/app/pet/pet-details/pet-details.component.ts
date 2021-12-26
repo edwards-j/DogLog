@@ -10,6 +10,7 @@ import { Pet } from 'src/app/models/pet.model';
 import { DailyLog } from 'src/app/models/daily-log.model';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { state } from '@angular/animations';
 
 
 @Component({
@@ -60,6 +61,10 @@ export class PetDetailsComponent implements OnInit, AfterViewInit {
 
   navigateHome(): void {
     this.router.navigate(['/home'])
+  }
+
+  navigateToManagePet(): void {
+    this.router.navigate(['/manage'], { state: { currentPet: this.currentPet } })
   }
 
   getDailyLogs() {
