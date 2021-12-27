@@ -1,5 +1,5 @@
 <mat-card class="form-card">
-    <form [formGroup]="addPetForm" (ngSubmit)="addPet()">
+    <form [formGroup]="addPetForm">
         <p>
             <mat-form-field appearance="outline">
                 <mat-label>Pet's Name</mat-label>
@@ -37,6 +37,8 @@
         </div>
 
 
-        <button mat-raised-button color="primary">Add Pet</button>
+        <button *ngIf="!editMode" mat-raised-button color="primary" (click)="addPet()">Add Pet</button>
+        <button *ngIf="editMode" mat-raised-button color="primary" (click)="updatePet()">Update</button>
+        <button *ngIf="editMode" mat-raised-button color="primary" (click)="closeDialog()">Cancel</button>
     </form>
 </mat-card>

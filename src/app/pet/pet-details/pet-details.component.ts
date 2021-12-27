@@ -64,7 +64,7 @@ export class PetDetailsComponent implements OnInit, AfterViewInit {
   }
 
   navigateToManagePet(): void {
-    this.router.navigate(['/manage'], { state: { currentPet: this.currentPet } })
+    this.router.navigate(['/manage'], { state: { currentPet: this.currentPet, dailyLogs: this.dailyLogs } })
   }
 
   getDailyLogs() {

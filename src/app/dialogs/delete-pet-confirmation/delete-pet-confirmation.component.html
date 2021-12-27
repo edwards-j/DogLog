@@ -1,0 +1,6 @@
+<p>Are you sure you want to delete all of {{currentPet.petName}}'s information?</p>
+<p>This will erase all data for all users that {{currentPet.petName}} has been shared with. This action cannot be undone</p>
+<p>If you're sure, type <b>{{currentPet.petName}}</b> below</p>
+<input type="text" [(ngModel)]="petNameInput">
+<button mat-raised-button color="warn" [disabled]="petNameInput !== currentPet.petName" (click)="deletePet()">Delete</button>
+<button mat-raised-button color="primary" (click)="closeDialog()">Cancel</button>

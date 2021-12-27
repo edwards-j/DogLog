@@ -22,6 +22,10 @@ export class PetService {
     return this.db.collection('pets').doc(petId).delete()
   }
 
+  updatePet(petId: any, petInfo: any): Promise<any> {
+    return this.db.collection('pets').doc(petId).update(petInfo)
+  }
+
   // Gets the pets for a user
   getUsersPets(email: string): Observable<any> {
     return this.db.collection('pets', pet => pet.where('sharedWith', 'array-contains', email)).snapshotChanges()
@@ -67,10 +71,6 @@ export class PetService {
     return this.db.collection('shareInvites', invite => invite.where('shareWith', '==', email)).snapshotChanges();
   }
 
-  getUnseenShareInvites(email: any): Observable<any> {
-    return this.db.collection('shareInvites', invite => invite.where('shareWith', '==', email).where('seen','==', false)).get();
-  }
-
   getUnseenShareInvitesStream(email: any): Observable<any> {
     return this.db.collection('shareInvites', invite => invite.where('shareWith', '==', email).where('seen','==', false)).snapshotChanges();
   }
@@ -81,6 +81,10 @@ export class PetService {
 
   addUserToPet(petID: string, email: string) {
     return this.db.collection('pets').doc(petID).update({sharedWith: arrayUnion(email)})
+  }
+
+  removeUserFromPet(petID: string | undefined, email: string) {
+    return this.db.collection('pets').doc(petID).update({sharedWith: arrayRemove(email)})
   }
 
   deleteShareInvite(inviteID: string | undefined) {
