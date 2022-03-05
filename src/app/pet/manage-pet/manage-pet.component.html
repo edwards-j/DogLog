@@ -25,7 +25,12 @@
 </div>
 
 <div>
-    <!-- <p>Event Types</p> -->
+    <h2>Event Types</h2>
+    <p>The following events will be used when making Daily Logs</p>
+    <p *ngFor="let event of currentPet.eventTypes">
+        {{event}}
+    </p>
+
     <!-- 
         
         Event type options could be stored on the pet level, then when a new daily log is made, those events are added to that daily log

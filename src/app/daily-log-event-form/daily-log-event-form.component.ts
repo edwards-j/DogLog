@@ -16,6 +16,7 @@ export class DailyLogEventFormComponent implements OnInit {
 
   petID: string;
   dailyLogID: string;
+  eventTypes: string[]
   currentUser: any
 
   addEventForm: FormGroup
@@ -28,6 +29,7 @@ export class DailyLogEventFormComponent implements OnInit {
 
     this.petID = this.data.petID;
     this.dailyLogID = this.data.dailyLogID
+    this.eventTypes = this.data.eventTypes
 
     //let state = this.router.getCurrentNavigation()!.extras.state
 

@@ -20,13 +20,6 @@
                 <mat-radio-button class="gender-radio-button" value="female">Female</mat-radio-button>
             </mat-radio-group>
         </div>
-
-        <!-- <div>
-            <mat-form-field appearance="outline">
-                <mat-label>Breed</mat-label>
-                <input formControlName="breed" matInput placeholder="Breed">
-            </mat-form-field>
-        </div> -->
         <div>
             <mat-form-field appearance="outline">
                 <mat-label>Birthday</mat-label>
@@ -35,6 +28,13 @@
                 <mat-datepicker #birthdayDatepicker></mat-datepicker>
             </mat-form-field>
         </div>
+        <p *ngIf="!editMode">
+            <mat-form-field appearance="outline">
+                <mat-label>Event Types</mat-label>
+                <input formControlName="eventTypes" type="text" matInput placeholder="Food, water, treats">
+                <mat-hint>Enter the events you'd like to track, seperated by commas</mat-hint>
+            </mat-form-field>
+        </p>
 
 
         <button *ngIf="!editMode" mat-raised-button color="primary" (click)="addPet()">Add Pet</button>

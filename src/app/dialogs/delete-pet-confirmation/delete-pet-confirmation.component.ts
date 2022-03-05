@@ -47,5 +47,4 @@ export class DeletePetConfirmationComponent implements OnInit {
       this.router.navigate(['/home'])
     })
   }
-
 }

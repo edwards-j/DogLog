@@ -31,6 +31,8 @@ export class ManagePetComponent implements OnInit {
       snackBar.open('Woof! There was an error loading Pet Info', 'Close', { verticalPosition: 'top' });
       this.navigateHome()
     }
+
+    console.log(this.currentPet)
   }
 
   ngOnInit(): void {

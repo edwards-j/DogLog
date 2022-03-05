@@ -12,9 +12,10 @@
     <h1>{{currentPet.petName}}</h1>
 </div>
 
-<div class="pet-detail-info">
+<div class="pet-detail-info" *ngIf="currentPet.ownerEmail !== currentUser.email">
     <div>
-        <p *ngIf="currentPet.ownerEmail !== currentUser.email">Primary Owner: {{currentPet.ownerEmail}}</p>
+        <p>Primary Owner: {{currentPet.ownerEmail}}</p>
+        <button (click)="unfollowPet()" mat-raised-button color="warn">Unfollow {{currentPet.petName}}</button>
     </div>
 </div>
 

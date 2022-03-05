@@ -21,7 +21,8 @@ export class AddPetFormComponent implements OnInit {
       // 'breed': new FormControl(''),
       'species': new FormControl('', Validators.required),
       'gender': new FormControl(''),
-      'birthday': new FormControl('')
+      'birthday': new FormControl(''),
+      'eventTypes': new FormControl('', Validators.required),
     })
 
     this.petInfoToEdit = data['petInfoToEdit']
@@ -50,8 +51,11 @@ export class AddPetFormComponent implements OnInit {
       gender: this.addPetForm.controls['gender'].value,
       birthday: new Date(this.addPetForm.controls['birthday'].value).getTime(),
       ownerEmail: this.data.userEmail,
-      sharedWith: [this.data.userEmail]
+      sharedWith: [this.data.userEmail],
+      eventTypes: this.addPetForm.controls['eventTypes'].value.split(',')
     }
+
+    debugger
 
     this.petService.addPet(petToAdd).then((res: any) => {
       if (res) {

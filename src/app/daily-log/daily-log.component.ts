@@ -9,6 +9,7 @@ import { DailyLog } from '../models/daily-log.model';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { DailyLogEventFormComponent } from '../daily-log-event-form/daily-log-event-form.component';
 import { AuthService } from '../services/auth.service';
+import { ɵINTERNAL_BROWSER_DYNAMIC_PLATFORM_PROVIDERS } from '@angular/platform-browser-dynamic';
 
 @Component({
   selector: 'daily-log',
@@ -21,18 +22,7 @@ export class DailyLogComponent implements OnInit {
   notes: any;
   user: any;
 
-  eventCounts: any = {
-    'food': 0,
-    'water': 0,
-    'treat': 0,
-    'walk': 0,
-    'pee': 0,
-    'poop': 0
-  }
-
-  foodCount = 0;
-  waterCount = 0;
-  treatCount = 0;
+  eventCounts: any = {}
 
   constructor(private authService: AuthService, private petService: PetService, private router: Router, private snackBar: MatSnackBar, private dialog: MatDialog, private bottomSheet: MatBottomSheet) {
     let state = this.router.getCurrentNavigation()!.extras.state
@@ -49,6 +39,13 @@ export class DailyLogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Build hastable of event types for this daily log
+    // This is looped over in the template to display event name and count
+    for (let event of this.dailyLog.eventTypes!) {
+      this.eventCounts[event] = 0;
+    }
+
+    // Get counts of the events
     this.getEvents()
   }
 
@@ -57,6 +54,7 @@ export class DailyLogComponent implements OnInit {
   }
 
   getEvents() {
+    
     this.petService.getDailyLogDetails(this.currentPet.petID, this.dailyLog.dailyLogID).subscribe(res => {
       if (res) {
         this.dailyLog.events = res.payload.data()!.events
@@ -93,6 +91,6 @@ export class DailyLogComponent implements OnInit {
   }
 
   openAddEventForm() {
-    this.bottomSheet.open(DailyLogEventFormComponent, { data: { dailyLogID: this.dailyLog.dailyLogID, petID: this.currentPet.petID } })
+    this.bottomSheet.open(DailyLogEventFormComponent, { data: { dailyLogID: this.dailyLog.dailyLogID, petID: this.currentPet.petID, eventTypes: this.dailyLog.eventTypes } })
   }
 }
