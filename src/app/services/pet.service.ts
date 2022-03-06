@@ -26,6 +26,14 @@ export class PetService {
     return this.db.collection('pets').doc(petId).update(petInfo)
   }
 
+  addEventType(petID: string | undefined, eventToAdd: string) {
+    return this.db.collection('pets').doc(petID).update({eventTypes: arrayUnion(eventToAdd)})
+  }
+
+  removeEventType(petID: string | undefined, eventToRemove: string) {
+    return this.db.collection('pets').doc(petID).update({eventTypes: arrayRemove(eventToRemove)})
+  }
+
   // Gets the pets for a user
   getUsersPets(email: string): Observable<any> {
     return this.db.collection('pets', pet => pet.where('sharedWith', 'array-contains', email)).snapshotChanges()
@@ -56,7 +64,6 @@ export class PetService {
       events: arrayRemove(event)
     })
   }
-  
 
   getDailyLogDetails(petId: string | undefined , dailyLogId: any) {
     return this.db.collection('pets').doc(petId).collection('dailyLogs').doc(dailyLogId).snapshotChanges()

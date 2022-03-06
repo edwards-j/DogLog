@@ -9,6 +9,7 @@ import { AddPetFormComponent } from 'src/app/dialogs/add-pet-form/add-pet-form.c
 import { PetService } from 'src/app/services/pet.service';
 import { DailyLog } from 'src/app/models/daily-log.model';
 import { DeletePetConfirmationComponent } from 'src/app/dialogs/delete-pet-confirmation/delete-pet-confirmation.component';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-manage-pet',
@@ -20,6 +21,7 @@ export class ManagePetComponent implements OnInit {
   dailyLogs: DailyLog[];
   shareWithDisplay: string[];
   currentUser: any;
+  addEventForm: FormGroup
 
   constructor(private router: Router, private snackBar: MatSnackBar, private dialog: MatDialog, private authService: AuthService, private petService: PetService) { 
     let state = this.router.getCurrentNavigation()!.extras.state
@@ -32,7 +34,9 @@ export class ManagePetComponent implements OnInit {
       this.navigateHome()
     }
 
-    console.log(this.currentPet)
+    this.addEventForm = new FormGroup({
+      'eventName': new FormControl('', Validators.required)
+    })
   }
 
   ngOnInit(): void {
@@ -68,6 +72,33 @@ export class ManagePetComponent implements OnInit {
 
   openDeletePetConfirmation() {
     let deleteDialog = this.dialog.open(DeletePetConfirmationComponent, {data: {petInfo: this.currentPet, dailyLogs: this.dailyLogs}})
+  }
+
+  addEvent() {
+    if (this.addEventForm.invalid) return;
+
+    const eventToAdd = this.addEventForm.controls['eventName'].value;
+
+    if (this.currentPet.eventTypes!.includes(eventToAdd)) {
+      this.snackBar.open(`This event alread exists for ${this.currentPet.petName}`,'Close', { verticalPosition: 'top' })
+      return
+    }
+
+    this.petService.addEventType(this.currentPet.petID, eventToAdd).then((res: any) => {
+      if (res === undefined) {
+        this.currentPet.eventTypes!.push(eventToAdd)
+        this.addEventForm.reset();
+      }
+    })
+  }
+
+  removeEvent(event : string) {
+    this.petService.removeEventType(this.currentPet.petID, event).then(() => {
+      this.snackBar.open('Event Removed','Close', { verticalPosition: 'top' })
+
+      this.currentPet.eventTypes = this.currentPet.eventTypes!.filter(e => e !== event)
+    })
+
   }
 
 }

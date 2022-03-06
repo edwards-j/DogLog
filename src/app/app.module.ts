@@ -59,6 +59,7 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ShareInvitesComponent } from './share-invites/share-invites.component';
 import { ManagePetComponent } from './pet/manage-pet/manage-pet.component';
 import { DeletePetConfirmationComponent } from './dialogs/delete-pet-confirmation/delete-pet-confirmation.component';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -127,7 +128,7 @@ import { DeletePetConfirmationComponent } from './dialogs/delete-pet-confirmatio
     MatTooltipModule,
     MatTreeModule
   ],
-  providers: [MatBottomSheet],
+  providers: [MatBottomSheet, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

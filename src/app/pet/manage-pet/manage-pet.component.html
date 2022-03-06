@@ -21,20 +21,22 @@
 </div>
 
 <div>
-    <mat-slide-toggle>Ability To Add Events To Past Logs?</mat-slide-toggle>
-</div>
-
-<div>
     <h2>Event Types</h2>
     <p>The following events will be used when making Daily Logs</p>
-    <p *ngFor="let event of currentPet.eventTypes">
-        {{event}}
-    </p>
-
-    <!-- 
-        
-        Event type options could be stored on the pet level, then when a new daily log is made, those events are added to that daily log
-        This way, incase the events change in the future, the log values are correct for that day
-    
-    -->
+    <div *ngFor="let event of currentPet.eventTypes">
+        <span>
+            {{event}}
+        </span>
+        <button mat-button class="delete-button" (click)="removeEvent(event)">
+            <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+    </div>
+    <form [formGroup]="addEventForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Event Name</mat-label>
+            <input formControlName="eventName" type="text" matInput placeholder="Walks">
+            <mat-hint>Enter just a single event to track</mat-hint>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addEvent()" [disabled]="addEventForm.invalid">Add Event</button>
+    </form>
 </div>

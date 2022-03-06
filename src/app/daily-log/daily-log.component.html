@@ -20,7 +20,7 @@
 
 <div class="events-header">
     <h2>Events</h2>
-    <button mat-mini-fab class="add-button" (click)="openAddEventForm()">
+    <button *ngIf="todayLog" mat-mini-fab class="add-button" (click)="openAddEventForm()">
         <mat-icon class="add-icon">add</mat-icon>
     </button>
 </div>
