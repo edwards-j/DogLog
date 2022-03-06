@@ -3,7 +3,7 @@
         <div>
             <mat-radio-group class="event-form-button-group" formControlName="type">
                 <div class="event-button-section">
-                        <mat-radio-button *ngFor="let event of eventTypes" class="event-form-button" value="event">{{event}}</mat-radio-button>
+                        <mat-radio-button *ngFor="let event of eventTypes" class="event-form-button" value="{{event}}">{{event}}</mat-radio-button>
                 </div>
             </mat-radio-group>
         </div>

@@ -52,7 +52,7 @@ export class AddPetFormComponent implements OnInit {
       birthday: new Date(this.addPetForm.controls['birthday'].value).getTime(),
       ownerEmail: this.data.userEmail,
       sharedWith: [this.data.userEmail],
-      eventTypes: this.addPetForm.controls['eventTypes'].value.split(',')
+      eventTypes: this.addPetForm.controls['eventTypes'].value.split(',').trim()
     }
 
     debugger

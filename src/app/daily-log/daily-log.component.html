@@ -11,7 +11,7 @@
     <div class="summary-row">
         <p *ngFor="let event of eventCounts | keyvalue">
             {{event.key}} <br />
-            {{event.value}}
+            {{event.value || 0}}
         </p>
     </div>
 </div>
