@@ -1,4 +1,4 @@
-<p>{{currentPet.petName}}'s Info </p>
+<h1>{{currentPet.petName}}'s Info </h1>
 
 <button mat-button class="share-pet-button" (click)="openSharePetForm()">
     <mat-icon>share</mat-icon>
@@ -11,7 +11,8 @@
 </button>
 
 <div>
-    <p>Shared With</p>
+    <h2>Shared With</h2>
+    <p *ngIf="shareWithDisplay.length === 0">{{currentPet.petName}} isn't shared with anyone. Click the green icon above to share with other users.</p>
     <div class="shared-with-list" *ngFor="let user of shareWithDisplay">
         <p>{{user}} </p>
         <button mat-button class="delete-button" (click)="removeShare(user)">
@@ -31,7 +32,7 @@
             <mat-icon>remove_circle_outline</mat-icon>
         </button>
     </div>
-    <form [formGroup]="addEventForm">
+    <form [formGroup]="addEventForm" class="addEvent-form">
         <mat-form-field appearance="outline">
             <mat-label>Event Name</mat-label>
             <input formControlName="eventName" type="text" matInput placeholder="Walks">

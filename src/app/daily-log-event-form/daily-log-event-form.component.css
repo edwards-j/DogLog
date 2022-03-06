@@ -16,7 +16,8 @@ form {
 .event-button-section {
     display: flex;
     flex-direction: row;
-    justify-content: space-around
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .event-form-button {

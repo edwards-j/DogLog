@@ -79,14 +79,18 @@ export class ManagePetComponent implements OnInit {
 
     const eventToAdd = this.addEventForm.controls['eventName'].value;
 
-    if (this.currentPet.eventTypes!.includes(eventToAdd)) {
+    if (this.currentPet.eventTypes && this.currentPet.eventTypes!.includes(eventToAdd)) {
       this.snackBar.open(`This event alread exists for ${this.currentPet.petName}`,'Close', { verticalPosition: 'top' })
       return
     }
 
     this.petService.addEventType(this.currentPet.petID, eventToAdd).then((res: any) => {
       if (res === undefined) {
-        this.currentPet.eventTypes!.push(eventToAdd)
+        if (!this.currentPet.eventTypes) {
+          this.currentPet.eventTypes = [eventToAdd]
+        } else {
+          this.currentPet.eventTypes!.push(eventToAdd)
+        }
         this.addEventForm.reset();
       }
     })

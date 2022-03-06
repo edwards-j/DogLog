@@ -55,8 +55,6 @@ export class AddPetFormComponent implements OnInit {
       eventTypes: this.addPetForm.controls['eventTypes'].value.split(',').trim()
     }
 
-    debugger
-
     this.petService.addPet(petToAdd).then((res: any) => {
       if (res) {
         this.dialogRef.close()
