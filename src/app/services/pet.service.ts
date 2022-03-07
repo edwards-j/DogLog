@@ -39,6 +39,10 @@ export class PetService {
     return this.db.collection('pets', pet => pet.where('sharedWith', 'array-contains', email)).snapshotChanges()
   }
 
+  getPet(petId: string): Observable<any> {
+    return this.db.collection('pets').doc(petId).snapshotChanges()
+  }
+
   // Daily Log functions
   getDailyLogs(petId: string | undefined): Observable<any> {
     return this.db.collection('pets').doc(petId).collection('dailyLogs').snapshotChanges()

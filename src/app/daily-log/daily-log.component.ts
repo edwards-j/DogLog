@@ -25,6 +25,7 @@ export class DailyLogComponent implements OnInit, OnDestroy {
   user: any;
   todayLog: boolean;
   eventStream$: Subscription;
+  petStream$: Subscription;
 
   eventCounts: any = {}
 
@@ -51,7 +52,24 @@ export class DailyLogComponent implements OnInit, OnDestroy {
       this.todayLog = false;
     }
 
-    this.user = this.authService.getUserDataFromSession()
+    this.user = this.authService.getUserDataFromSession();
+
+    // This subscription is here to make sure everything is up to date
+    // Since the data is passed around in, state object some of the data (e.g. eventTypes) weren't always up to day, b/c the GET was happening from the home component
+    if (this.currentPet.petID) {
+      this.petStream$ = this.petService.getPet(this.currentPet.petID).subscribe(res => {
+        this.currentPet = {
+          petID: res.payload.id,
+          petName: res.payload.data().petName,
+          ownerEmail: res.payload.data().ownerEmail,
+          gender: res.payload.data().gender,
+          species: res.payload.data().species,
+          birthday: res.payload.data().birthday,
+          sharedWith: res.payload.data().sharedWith,
+          eventTypes: res.payload.data().eventTypes
+        }
+      })
+    }
   }
 
   ngOnInit(): void {
@@ -60,6 +78,7 @@ export class DailyLogComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.eventStream$.unsubscribe();
+    this.petStream$.unsubscribe();
   }
 
   navigateHome(): void {
