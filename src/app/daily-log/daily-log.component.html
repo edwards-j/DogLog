@@ -9,18 +9,10 @@
 
 <div class="summary-wrapper">
     <div class="summary-row">
-        <p>Food</p>
-        <p>Water</p>
-        <p>Treats</p>
-        <p>Pee</p>
-        <p>Poop</p>
-    </div>
-    <div class="summary-row">
-        <p>{{eventCounts.food}}</p>
-        <p>{{eventCounts.water}}</p>
-        <p>{{eventCounts.treat}}</p>
-        <p>{{eventCounts.pee}}</p>
-        <p>{{eventCounts.poop}}</p>
+        <p *ngFor="let event of eventCounts | keyvalue">
+            {{event.key}} <br />
+            {{event.value || 0}}
+        </p>
     </div>
 </div>
 
@@ -28,7 +20,7 @@
 
 <div class="events-header">
     <h2>Events</h2>
-    <button mat-mini-fab class="add-button" (click)="openAddEventForm()">
+    <button *ngIf="todayLog" mat-mini-fab class="add-button" (click)="openAddEventForm()">
         <mat-icon class="add-icon">add</mat-icon>
     </button>
 </div>

@@ -74,7 +74,8 @@ export class PetDetailsComponent implements OnInit, AfterViewInit {
           let dailyLog: DailyLog = {
             dailyLogID: d.payload.doc.id,
             date: d.payload.doc.data().date,
-            events: d.payload.doc.data().events
+            events: d.payload.doc.data().events,
+            eventTypes: d.payload.doc.data().eventTypes
           }
 
           return dailyLog
@@ -103,7 +104,8 @@ export class PetDetailsComponent implements OnInit, AfterViewInit {
 
     let dailyLog: DailyLog = {
       date: Date.now(),
-      events: []
+      events: [],
+      eventTypes: this.currentPet.eventTypes
     }
 
     this.petService.addDailyLog(this.currentPet.petID, dailyLog)
@@ -122,21 +124,28 @@ export class PetDetailsComponent implements OnInit, AfterViewInit {
     this.dialog.open(SharePetFormComponent, { data: { userEmail: this.currentUser.email, petID: this.currentPet.petID, petName: this.currentPet.petName } })
   }
 
-  deletePet() {
-    // If there are daily logs for this pet, we have to delete them first
-    if (this.dailyLogs.length > 0) {
-      for (let log of this.dailyLogs) {
-        this.petService.deleteDailyLog(this.currentPet.petID, log.dailyLogID)
-      }
-    }
+  // deletePet() {
+  //   // If there are daily logs for this pet, we have to delete them first
+  //   if (this.dailyLogs.length > 0) {
+  //     for (let log of this.dailyLogs) {
+  //       this.petService.deleteDailyLog(this.currentPet.petID, log.dailyLogID)
+  //     }
+  //   }
 
-    // Once all the dailyLogs subcollections have been deleted, we can delete the pet
-    this.petService.deletePet(this.currentPet.petID).then(() => {
-      this.navigateHome()
-      this.snackBar.open('Pet sucessfully deleted', 'Close', { verticalPosition: 'top' });
-    }).catch((error) => {
-      console.error("Error deleting pet: ", error);
-    });
+  //   // Once all the dailyLogs subcollections have been deleted, we can delete the pet
+  //   this.petService.deletePet(this.currentPet.petID).then(() => {
+  //     this.navigateHome()
+  //     this.snackBar.open('Pet sucessfully deleted', 'Close', { verticalPosition: 'top' });
+  //   }).catch((error) => {
+  //     console.error("Error deleting pet: ", error);
+  //   });
+  // }
+
+  unfollowPet() {
+    this.petService.removeUserFromPet(this.currentPet.petID, this.currentUser.email).then(() => {
+      this.navigateHome();
+      this.snackBar.open(`You are no longer following ${this.currentPet.petName}`, 'Close', { verticalPosition: 'top' });
+    })
   }
 
   getCurrentDate() {

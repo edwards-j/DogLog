@@ -17,3 +17,37 @@
 .edit-button {
     color: #EC8ECE;
 }
+
+.addEvent-form mat-form-field mat-label {
+    color: white
+}
+
+.addEvent-form mat-form-field input {
+    border-color: white
+}
+
+/* input outline color */
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #7B8EFF!important;
+    opacity: 1 !important;
+}
+
+/* mat-input focused color */
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: #01FDF7!important;
+}
+
+/* mat-input error outline color */
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick{
+    color: #F2557A!important;
+    opacity: 0.8!important;
+}
+
+/* mat-hint outline color */
+::ng-deep .mat-hint {
+    color: white!important;
+}
+
+::ng-dep .mat-button-disabled {
+    background-color: gray !important
+}

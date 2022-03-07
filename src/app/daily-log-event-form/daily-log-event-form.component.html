@@ -2,21 +2,10 @@
     <form [formGroup]="addEventForm" (ngSubmit)="addDailyLogEvent()">
         <div>
             <mat-radio-group class="event-form-button-group" formControlName="type">
-                <mat-label>Diet</mat-label>
                 <div class="event-button-section">
-                    <mat-radio-button class="event-form-button" value="food">Food</mat-radio-button>
-                    <mat-radio-button class="event-form-button" value="water">Water</mat-radio-button>
-                    <mat-radio-button class="event-form-button" value="treat">Treat</mat-radio-button>
-                </div>
-                <mat-label>Outside</mat-label>
-                <div class="event-button-section">
-                    <mat-radio-button class="event-form-button" value="walk">Walk</mat-radio-button>
-                    <mat-radio-button class="event-form-button" value="pee">Pee</mat-radio-button>
-                    <mat-radio-button class="event-form-button" value="poop">Poop</mat-radio-button>
-                </div>
-                <mat-label>Other</mat-label>
-                <div class="event-button-section">
-                    <mat-radio-button class="event-form-button" value="medicine">Medicine</mat-radio-button>
+                    <span *ngFor="let event of eventTypes">
+                        <mat-radio-button class="event-form-button" value="{{event}}">{{event}}</mat-radio-button> 
+                    </span>
                 </div>
             </mat-radio-group>
         </div>

@@ -9,4 +9,5 @@ export class Pet {
     species: string;
     birthday: number;
     dailyLogs?: DailyLog[];
+    eventTypes?: string[];
 }

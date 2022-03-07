@@ -3,5 +3,6 @@ export class DailyLog {
     dailyLogID?: string;
     petID?: string;
     date: number; // Unix time
+    eventTypes?: string[]
     events: DailyLogEvent[];
 }

@@ -9,3 +9,7 @@
 .gender-radio-button {
     margin: 5px;
 }
+
+.event-hint-text {
+    color: black !important;
+}

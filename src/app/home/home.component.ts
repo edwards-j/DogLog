@@ -48,7 +48,8 @@ export class HomeComponent implements OnInit, OnDestroy {
           gender: d.payload.doc.data().gender,
           species: d.payload.doc.data().species,
           birthday: d.payload.doc.data().birthday,
-          sharedWith: d.payload.doc.data().sharedWith
+          sharedWith: d.payload.doc.data().sharedWith,
+          eventTypes: d.payload.doc.data().eventTypes
         }
 
         return pet;
