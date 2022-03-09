@@ -11,6 +11,7 @@ import { DailyLog } from 'src/app/models/daily-log.model';
 import { DeletePetConfirmationComponent } from 'src/app/dialogs/delete-pet-confirmation/delete-pet-confirmation.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { AddEventFormComponent } from 'src/app/dialogs/add-event-form/add-event-form.component';
 
 @Component({
   selector: 'app-manage-pet',
@@ -22,8 +23,8 @@ export class ManagePetComponent implements OnInit, OnDestroy {
   dailyLogs: DailyLog[];
   shareWithDisplay: string[];
   currentUser: any;
-  addEventForm: FormGroup
   petStream$: Subscription;
+  showEventDeleteIcon: boolean;
 
   constructor(private router: Router, private snackBar: MatSnackBar, private dialog: MatDialog, private authService: AuthService, private petService: PetService) {
     let state = this.router.getCurrentNavigation()!.extras.state
@@ -50,11 +51,6 @@ export class ManagePetComponent implements OnInit, OnDestroy {
       snackBar.open('Woof! There was an error loading Pet Info', 'Close', { verticalPosition: 'top' });
       this.navigateHome()
     }
-
-    this.addEventForm = new FormGroup({
-      'eventName': new FormControl('', Validators.required)
-    })
-
   }
 
   ngOnInit(): void {
@@ -64,6 +60,8 @@ export class ManagePetComponent implements OnInit, OnDestroy {
     this.shareWithDisplay = this.currentPet.sharedWith!.filter(email => {
       return email !== this.currentUser.email;
     });
+
+    this.showEventDeleteIcon = false;
   }
 
   ngOnDestroy() {
@@ -96,28 +94,18 @@ export class ManagePetComponent implements OnInit, OnDestroy {
     let deleteDialog = this.dialog.open(DeletePetConfirmationComponent, { data: { petInfo: this.currentPet, dailyLogs: this.dailyLogs } })
   }
 
-  addEvent() {
-    if (this.addEventForm.invalid) return;
-
-    const eventToAdd = this.addEventForm.controls['eventName'].value;
-
-    if (this.currentPet.eventTypes && this.currentPet.eventTypes!.includes(eventToAdd)) {
-      this.snackBar.open(`This event alread exists for ${this.currentPet.petName}`, 'Close', { verticalPosition: 'top' })
-      return
-    }
-
-    this.petService.addEventType(this.currentPet.petID, eventToAdd).then((res: any) => {
-      if (res === undefined) {
-        this.addEventForm.reset();
-      }
-    })
+  openAddEventFormDialog() {
+    this.dialog.open(AddEventFormComponent, { data: { currentPet: this.currentPet } })
   }
 
   removeEvent(event: string) {
     this.petService.removeEventType(this.currentPet.petID, event).then(() => {
       this.snackBar.open('Event Removed', 'Close', { verticalPosition: 'top' })
     })
+  }
 
+  toggleEventDeleteIcon() {
+    this.showEventDeleteIcon = !this.showEventDeleteIcon;
   }
 
 }

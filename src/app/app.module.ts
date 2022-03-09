@@ -60,6 +60,7 @@ import { ShareInvitesComponent } from './share-invites/share-invites.component';
 import { ManagePetComponent } from './pet/manage-pet/manage-pet.component';
 import { DeletePetConfirmationComponent } from './dialogs/delete-pet-confirmation/delete-pet-confirmation.component';
 import { DatePipe } from '@angular/common';
+import { AddEventFormComponent } from './dialogs/add-event-form/add-event-form.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { DatePipe } from '@angular/common';
     DailyLogEventFormComponent,
     ShareInvitesComponent,
     ManagePetComponent,
-    DeletePetConfirmationComponent
+    DeletePetConfirmationComponent,
+    AddEventFormComponent
   ],
   imports: [
     BrowserModule,

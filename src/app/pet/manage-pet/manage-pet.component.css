@@ -1,3 +1,27 @@
+.wrapper {
+    width: 80%;
+}
+
+.header, .share-with, .event-types {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 5em;
+}
+
+.header-actions {
+    display: flex;
+    flex-direction: row
+}
+
+.share-with {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    margin: auto
+}
+
 .shared-with-list {
     display: flex;
     flex-direction: row;
@@ -17,6 +41,43 @@
 .edit-button {
     color: #EC8ECE;
 }
+
+.add-button {
+    background-color: #72C7A9;
+}
+
+.add-icon {
+    color: #050535;
+    font-size: 35px;
+    line-height: inherit;
+    width: inherit
+}
+
+.events-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 3em auto 1em;
+    border-bottom: 2px solid #7B8EFF;
+    width: 80%;
+}
+
+.event-list {
+    display: flex;
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+}
+.event-name {
+    margin: 1em 0;
+    font-size: medium;
+}
+
+.delete-icon-displayed {
+    justify-content: space-between;
+}
+
 
 .addEvent-form mat-form-field mat-label {
     color: white

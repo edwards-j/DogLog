@@ -34,6 +34,10 @@ export class SignupComponent implements OnInit {
         }
     }
 
+    navigateToLogin() {
+        this.router.navigate(['/login']);
+    }
+
     signup() {
         if (this.signupForm.invalid)        // if there's an error in the form, don't submit it
             return;
