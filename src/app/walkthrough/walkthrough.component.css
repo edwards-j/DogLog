@@ -1,0 +1,7 @@
+::ng-deep .mat-step-text-label {
+    color: white !important;
+}
+
+.mat-stepper-vertical {
+    background-color: #050535;
+}

@@ -1,0 +1,78 @@
+<div class="walkthrough-wrapper">
+    <mat-stepper orientation="vertical" [linear]="true" #stepper>
+        <ng-template matStepperIcon="edit">
+            <mat-icon>pets</mat-icon>
+        </ng-template>
+
+        <ng-template matStepperIcon="done">
+            <mat-icon>done</mat-icon>
+        </ng-template>
+
+        <mat-step label="Welcome!">
+            <p>
+                Welcome to DogLog! The goal of this application is to help those responsible for taking care of pets
+                stay in sync. This way everyone knows when the animals have been fed, let out, recieved medicine, and
+                more.
+            </p>
+            <p>
+                You'll be able to add your pets to your profile, create daily logs of whatever events you want to track,
+                and share your pets with other users so everyone is up to date.
+            </p>
+            <button mat-button mat-raised-button color="primary" matStepperPrevious>Back</button>
+            <button mat-button mat-raised-button color="primary" matStepperNext>Next</button>
+        </mat-step>
+        <mat-step label="Add A Pet">
+            <p>
+                To create a pet, just click on the green + button from the home screen. This will open a form where you
+                can enter the pet's name, species, and other information.
+            </p>
+            <button mat-button mat-raised-button color="primary" matStepperPrevious>Back</button>
+            <button mat-button mat-raised-button color="primary" matStepperNext>Next</button>
+        </mat-step>
+        <mat-step label="Add Daily Logs">
+            <p>
+                To add a daily log for a pet, select them from the home screen, then click on the green + button. This
+                will add a new log for that day.
+            </p>
+            <p>
+                To add events for that day, click on the log, then click on the green + button next to the Events
+                header. The events that you are tracking for that pet will show up. Just select the event you want to
+                log, add a note if you'd like, then hit save.
+            </p>
+            <p>
+                The event will be added to the top of the list, and the daily summary at the top will be updated. To see
+                more information about the event, such as who created it and any notes associated, click on the "..."
+                icon on the right side of that event.
+            </p>
+            <button mat-button color="primary" matStepperPrevious>Back</button>
+            <button mat-button color="primary" matStepperNext>Next</button>
+        </mat-step>
+        <mat-step label="Edit Pet Info">
+            <p>
+                To share a pet with other users, select the pet from the home screen, then click on the gear icon in the
+                top right. This is where you'll be able to edit pet info, share the pet with other users, and update the
+                events you want to track.
+            </p>
+            <p>
+                Click the green share icon at the top and you'll be able to enter the email address of the user that you
+                want to share this pet with. They'll have access to the pet and will be able to add new logs.
+            </p>
+            <p>
+                The pet's primary owner is the only one who can share a pet with other users, edit the pet's info, and
+                change the events tracked.
+            </p>
+            <button mat-button mat-raised-button color="primary" matStepperPrevious>Back</button>
+            <button mat-button mat-raised-button color="primary" matStepperNext>Next</button>
+        </mat-step>
+        <mat-step label="Done">
+            <p>
+                And that's it, happy logging!
+            </p>
+            <div>
+                <button mat-button mat-raised-button color="primary" matStepperPrevious>Back</button>
+                <button mat-button mat-raised-button color="primary" matStepperNext
+                    (click)="navigateHome()">Done</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+</div>

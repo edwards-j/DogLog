@@ -3,7 +3,7 @@
     <mat-form-field appearance="outline">
         <mat-label>Event Name</mat-label>
         <input formControlName="eventName" type="text" matInput placeholder="Walks">
-        <mat-hint>Enter just a single event to track</mat-hint>
+        <mat-hint>Enter an event to track</mat-hint>
     </mat-form-field>
     <button mat-raised-button color="primary" (click)="addEvent()" [disabled]="addEventForm.invalid">Add Event</button>
     <button mat-raised-button (click)="closeDialog()">Cancel</button>

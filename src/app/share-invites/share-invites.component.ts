@@ -56,7 +56,6 @@ export class ShareInvitesComponent implements OnInit, OnDestroy {
   }
 
   acceptInvite(petID: string, petName: string, shareInviteID: string) {
-    debugger
     this.petService.addUserToPet(petID, this.user.email).then(() => {
       this.snackBar.open(`You\'ll now have access to ${petName}\'s logs`, 'Close', { verticalPosition: 'top', duration: 3000 })
 

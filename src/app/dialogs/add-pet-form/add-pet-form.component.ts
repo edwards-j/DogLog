@@ -21,8 +21,7 @@ export class AddPetFormComponent implements OnInit {
       // 'breed': new FormControl(''),
       'species': new FormControl('', Validators.required),
       'gender': new FormControl(''),
-      'birthday': new FormControl(''),
-      'eventTypes': new FormControl('', Validators.required),
+      'birthday': new FormControl('')
     })
 
     this.petInfoToEdit = data['petInfoToEdit']
@@ -52,7 +51,7 @@ export class AddPetFormComponent implements OnInit {
       birthday: new Date(this.addPetForm.controls['birthday'].value).getTime(),
       ownerEmail: this.data.userEmail,
       sharedWith: [this.data.userEmail],
-      eventTypes: this.addPetForm.controls['eventTypes'].value.trim().split(',')
+      eventTypes: ['Food', 'Water', 'Treats']
     }
 
     this.petService.addPet(petToAdd).then((res: any) => {
