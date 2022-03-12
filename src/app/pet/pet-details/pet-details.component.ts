@@ -97,7 +97,7 @@ export class PetDetailsComponent implements OnInit, AfterViewInit {
     // Check if there is already a log for today. If so, just return
     if (this.dailyLogs.length > 0) {
       if (this.timeConverter(this.dailyLogs[0].date) === this.timeConverter(Date.now())) {
-        this.snackBar.open('A log has already been created for today', 'Close', { duration: 2500 })
+        this.snackBar.open('A log has already been created for today', 'Close', { verticalPosition: 'top', duration: 2500 })
         return
       }
     }
@@ -123,23 +123,6 @@ export class PetDetailsComponent implements OnInit, AfterViewInit {
   openSharePetForm() {
     this.dialog.open(SharePetFormComponent, { data: { userEmail: this.currentUser.email, petID: this.currentPet.petID, petName: this.currentPet.petName } })
   }
-
-  // deletePet() {
-  //   // If there are daily logs for this pet, we have to delete them first
-  //   if (this.dailyLogs.length > 0) {
-  //     for (let log of this.dailyLogs) {
-  //       this.petService.deleteDailyLog(this.currentPet.petID, log.dailyLogID)
-  //     }
-  //   }
-
-  //   // Once all the dailyLogs subcollections have been deleted, we can delete the pet
-  //   this.petService.deletePet(this.currentPet.petID).then(() => {
-  //     this.navigateHome()
-  //     this.snackBar.open('Pet sucessfully deleted', 'Close', { verticalPosition: 'top' });
-  //   }).catch((error) => {
-  //     console.error("Error deleting pet: ", error);
-  //   });
-  // }
 
   unfollowPet() {
     this.petService.removeUserFromPet(this.currentPet.petID, this.currentUser.email).then(() => {

@@ -28,6 +28,7 @@ export class ManagePetComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router, private snackBar: MatSnackBar, private dialog: MatDialog, private authService: AuthService, private petService: PetService) {
     let state = this.router.getCurrentNavigation()!.extras.state
+    this.currentUser = this.authService.getUserDataFromSession();
 
     if (state) {
       this.currentPet = state!['currentPet']
@@ -45,6 +46,11 @@ export class ManagePetComponent implements OnInit, OnDestroy {
             sharedWith: res.payload.data().sharedWith,
             eventTypes: res.payload.data().eventTypes
           }
+
+          // Filter out the current user from the shared with array that is shown on screen
+          this.shareWithDisplay = this.currentPet.sharedWith!.filter(email => {
+            return email !== this.currentUser.email;
+          });
         })
       }
     } else {
@@ -54,13 +60,6 @@ export class ManagePetComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.currentUser = this.authService.getUserDataFromSession();
-
-    // Filter out the current user from the shared with array that is shown on screen
-    this.shareWithDisplay = this.currentPet.sharedWith!.filter(email => {
-      return email !== this.currentUser.email;
-    });
-
     this.showEventDeleteIcon = false;
   }
 
