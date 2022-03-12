@@ -10,6 +10,7 @@ import { DailyLogComponent } from './daily-log/daily-log.component';
 import { DailyLogEventFormComponent } from './daily-log-event-form/daily-log-event-form.component';
 import { ShareInvitesComponent } from './share-invites/share-invites.component';
 import { ManagePetComponent } from './pet/manage-pet/manage-pet.component';
+import { WalkthroughComponent } from './walkthrough/walkthrough.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path:'pet/dailyLog', component: DailyLogComponent},
   {path: 'logEvent', component: DailyLogEventFormComponent},
   {path: 'shareInvites', component: ShareInvitesComponent},
-  {path: 'manage', component: ManagePetComponent}
+  {path: 'manage', component: ManagePetComponent},
+  {path: 'walkthrough', component: WalkthroughComponent}
 ];
 
 @NgModule({

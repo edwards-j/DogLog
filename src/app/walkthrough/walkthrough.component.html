@@ -1,0 +1,69 @@
+<div class="walkthrough-wrapper">
+    <mat-stepper orientation="vertical" [linear]="true" #stepper>
+        <ng-template matStepperIcon="edit">
+            <mat-icon>pets</mat-icon>
+        </ng-template>
+
+        <ng-template matStepperIcon="done">
+            <mat-icon>done</mat-icon>
+        </ng-template>
+
+        <mat-step label="Welcome!">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Adipiscing enim eu turpis egestas. Lobortis elementum nibh tellus molestie nunc
+                non. Mi
+                ipsum faucibus vitae aliquet nec ullamcorper. Aliquam eleifend mi in nulla posuere sollicitudin aliquam.
+                Amet massa vitae tortor condimentum lacinia quis. Gravida in fermentum et sollicitudin ac.
+            </p>
+            <button mat-button color="primary" matStepperPrevious>Back</button>
+            <button mat-button color="primary" matStepperNext>Next</button>
+        </mat-step>
+        <mat-step label="Add A Pet">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Adipiscing enim eu turpis egestas. Lobortis elementum nibh tellus molestie nunc
+                non. Mi
+                ipsum faucibus vitae aliquet nec ullamcorper. Aliquam eleifend mi in nulla posuere sollicitudin aliquam.
+                Amet massa vitae tortor condimentum lacinia quis. Gravida in fermentum et sollicitudin ac.
+            </p>
+            <button mat-button color="primary" matStepperPrevious>Back</button>
+            <button mat-button color="primary" matStepperNext>Next</button>
+        </mat-step>
+        <mat-step label="Add Daily Logs">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Adipiscing enim eu turpis egestas. Lobortis elementum nibh tellus molestie nunc
+                non. Mi
+                ipsum faucibus vitae aliquet nec ullamcorper. Aliquam eleifend mi in nulla posuere sollicitudin aliquam.
+                Amet massa vitae tortor condimentum lacinia quis. Gravida in fermentum et sollicitudin ac.
+            </p>
+            <button mat-button color="primary" matStepperPrevious>Back</button>
+            <button mat-button color="primary" matStepperNext>Next</button>
+        </mat-step>
+        <mat-step label="Share A Pet">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Adipiscing enim eu turpis egestas. Lobortis elementum nibh tellus molestie nunc
+                non. Mi
+                ipsum faucibus vitae aliquet nec ullamcorper. Aliquam eleifend mi in nulla posuere sollicitudin aliquam.
+                Amet massa vitae tortor condimentum lacinia quis. Gravida in fermentum et sollicitudin ac.
+            </p>
+            <button mat-button color="primary" matStepperPrevious>Back</button>
+            <button mat-button color="primary" matStepperNext>Next</button>
+        </mat-step>
+        <mat-step label="Done">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Adipiscing enim eu turpis egestas. Lobortis elementum nibh tellus molestie nunc
+                non. Mi
+                ipsum faucibus vitae aliquet nec ullamcorper. Aliquam eleifend mi in nulla posuere sollicitudin aliquam.
+                Amet massa vitae tortor condimentum lacinia quis. Gravida in fermentum et sollicitudin ac.
+            </p>
+            <div>
+                <button mat-button color="primary" matStepperPrevious>Back</button>
+                <button mat-button color="primary" matStepperNext (click)="navigateHome()">Done</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+</div>

@@ -61,6 +61,8 @@ import { ManagePetComponent } from './pet/manage-pet/manage-pet.component';
 import { DeletePetConfirmationComponent } from './dialogs/delete-pet-confirmation/delete-pet-confirmation.component';
 import { DatePipe } from '@angular/common';
 import { AddEventFormComponent } from './dialogs/add-event-form/add-event-form.component';
+import { WalkthroughComponent } from './walkthrough/walkthrough.component';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 
 @NgModule({
@@ -78,7 +80,8 @@ import { AddEventFormComponent } from './dialogs/add-event-form/add-event-form.c
     ShareInvitesComponent,
     ManagePetComponent,
     DeletePetConfirmationComponent,
-    AddEventFormComponent
+    AddEventFormComponent,
+    WalkthroughComponent
   ],
   imports: [
     BrowserModule,
@@ -130,7 +133,10 @@ import { AddEventFormComponent } from './dialogs/add-event-form/add-event-form.c
     MatTooltipModule,
     MatTreeModule
   ],
-  providers: [MatBottomSheet, DatePipe],
+  providers: [MatBottomSheet, DatePipe, {
+    provide: STEPPER_GLOBAL_OPTIONS,
+    useValue: { displayDefaultIndicatorType: false }
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
